@@ -76,6 +76,7 @@ export default {
 .inner-container h2 {
   display: flex;
   text-align: center;
+  color: black;
   margin: 0px;
 }
 </style>

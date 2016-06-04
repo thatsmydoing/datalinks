@@ -1,6 +1,6 @@
 import {techs} from './data'
 
-const techList = techs.map(tech => {
+export const techList = techs.map(tech => {
   return { ...tech, slug: tech.name.toLowerCase().replace(/[\/\s]+/g, '-') };
 })
 
