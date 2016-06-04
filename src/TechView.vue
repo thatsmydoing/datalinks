@@ -16,11 +16,8 @@
 import TechCard from './TechCard.vue'
 import ArrowContainer from './ArrowContainer.vue'
 
-import {techs} from './data'
+import {getTechById, getTechBySlug} from './lookup'
 import {debounce} from 'lodash'
-
-var techMap = {};
-techs.forEach(tech => techMap[tech.id] = tech);
 
 export default {
   components: {
@@ -29,8 +26,6 @@ export default {
   },
   data () {
     return {
-      techs: techMap,
-      selected: 'Psych',
       hovered: null,
       prerequisiteArrows: [],
       successorArrows: []
@@ -38,13 +33,13 @@ export default {
   },
   computed: {
     current() {
-      return this.techs[this.selected];
+      return getTechBySlug(this.$route.params.id);
     },
     prerequisites() {
-      return this.current.prerequisites.map((id) => this.techs[id]);
+      return this.current.prerequisites.map(getTechById);
     },
     successors() {
-      return this.current.successors.map((id) => this.techs[id]);
+      return this.current.successors.map(getTechById);
     }
   },
   methods: {
@@ -78,10 +73,6 @@ export default {
   events: {
     hover(on) {
       this.hovered = on;
-    },
-    navigate(target) {
-      this.hovered = null;
-      this.selected = target;
     },
     redraw() {
       this._redraw(this);

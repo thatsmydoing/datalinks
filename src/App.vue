@@ -1,15 +1,20 @@
 <template>
   <div id="app">
-    <tech-view></tech-view>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import TechView from './TechView.vue'
+import {getTechBySlug} from './lookup'
 
 export default {
-  components: {
-    TechView
+  computed: {
+    title() {
+      if(this.$route.name == 'tech') {
+        return getTechBySlug(this.$route.params.id).name;
+      }
+      return 'Unknown';
+    }
   }
 }
 </script>

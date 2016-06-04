@@ -1,5 +1,5 @@
 <template>
-  <div class="outer-container" v-bind:class="{'hover': isHovering}" v-on:click="navigate" v-on:mouseenter="hover" v-on:mouseleave="hover">
+  <div class="outer-container" v-bind:class="{'hover': isHovering}" v-link="{ name: 'tech', params: {id: tech.slug} }" v-on:mouseenter="hover" v-on:mouseleave="hover">
     <div class="inner-container">
       <h2>{{ tech.name }}</h2>
     </div>
@@ -22,9 +22,6 @@ export default {
   methods: {
     hover(event) {
       this.$dispatch('hover', event.type == 'mouseenter' ? this.tech.id : null);
-    },
-    navigate() {
-      this.$dispatch('navigate', this.tech.id)
     }
   },
   ready() {
