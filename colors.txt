@@ -1,0 +1,7 @@
+outer-highlight: 00eb00
+outer-radius: 314e2c
+inner-highlight: 78a4d4
+inner-radius: 233b22
+blue-text: 688cc4
+green-text: 588c2c
+link-text: b8c060
