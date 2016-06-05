@@ -5,7 +5,7 @@
       <div class="ui-item ui-header">
         <span class="title">{{title}}</span>
       </div>
-      <div class="ui-item">
+      <div class="ui-item content">
         <router-view></router-view>
       </div>
     </div>
