@@ -1,5 +1,6 @@
 var fs = require('fs');
 var _ = require('lodash');
+var util = require('./util');
 
 function readData(name) {
   return fs.readFileSync(name+'.txt', { encoding: 'ASCII' }).replace(/\r/g, '');
@@ -8,9 +9,7 @@ function readData(name) {
 var alphax = readData('alphax');
 var blurbsx = readData('blurbsx');
 
-var techRegex = /#TECHNOLOGY[\s\S]*?\n\n/m
-var techInput = techRegex.exec(alphax)[0].trim().split('\n');
-techInput.shift();
+var techInput = util.getList('TECHNOLOGY', alphax);
 
 var techlist = techInput
 .map(function(line) {
@@ -125,18 +124,9 @@ while(queue.length > 0) {
   }
 }
 
-var blurbRegex = /##.*\n#(TECH|FAC)(\d+)\n([\s\S]*?)\n\n/mg
-var blurbMatch;
-
-while((blurbMatch = blurbRegex.exec(blurbsx)) != null) {
-  var type = blurbMatch[1];
-  var num = parseInt(blurbMatch[2]);
-  var text = blurbMatch[3];
-
-  if(type == 'TECH') {
-    techlist[num].blurb = text;
-  }
-}
+util.getEntries('TECH', blurbsx).forEach(function(item) {
+  techlist[item.index].blurb = item.entry;
+});
 
 var output = 'module.exports = ' + JSON.stringify({
   techs: validTechs
