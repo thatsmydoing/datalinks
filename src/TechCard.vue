@@ -44,7 +44,7 @@ export default {
   margin: 5px 0px;
 }
 
-.outer-container:hover, .outer-container.hover {
+.outer-container:hover {
   border-color: #00eb00;
 }
 
@@ -56,15 +56,19 @@ export default {
   width: 200px;
   height: 60px;
 
-  background-image: url('../img/bg2.png');
+  background-image: url('../img/btn.png');
 
   border-radius: 7px;
   padding: 10px;
 }
 
-.outer-container:hover .inner-container, .hover .inner-container {
+.outer-container:hover .inner-container {
   border: solid 2px #78a4d4;
   padding: 8px;
+}
+
+.outer-container:active .inner-container {
+  background-image: url('../img/btn-active.png');
 }
 
 .inner-container h2 {

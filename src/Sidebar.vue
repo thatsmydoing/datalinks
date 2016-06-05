@@ -79,7 +79,7 @@ export default {
 
 .sidebar ul li a:hover, .sidebar ul li a.v-link-active {
   color: black;
-  background-image: url(../img/bg2.png)
+  background-image: url(../img/btn.png)
 }
 
 .list.ui-item {
