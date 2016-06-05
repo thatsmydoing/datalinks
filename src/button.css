@@ -1,0 +1,23 @@
+.ui-btn {
+  display: block;
+  background-image: url(../img/btn.png);
+  padding: 5px;
+  border-radius: 2px;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+a.ui-btn {
+  text-decoration: none;
+}
+
+.ui-btn:hover {
+  border: solid 1px #78a4d4;
+  background-position: 0px 1px;
+  padding: 4px;
+}
+
+.ui-btn:active {
+  background-image: url(../img/btn-active.png);
+}

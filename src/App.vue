@@ -78,6 +78,7 @@ body {
 }
 
 @import './scrollbar.css';
+@import './button.css';
 
 .markup {
   white-space: pre-wrap;

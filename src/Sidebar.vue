@@ -1,17 +1,31 @@
 <template>
   <div class="ui-wrapper sidebar">
-    <div class="ui-item ui-header">
-      <span class="title">{{category}}</span>
-    </div>
-    <div class="ui-item list">
-      <ul>
-        <li v-for="link in links">
-          <a v-link="link.target">
-            {{ link.name }}
-          </a>
-        </li>
-      </ul>
-    </div>
+    <template v-if="showCategory">
+      <div class="ui-item ui-header">
+        <span class="title">Categories</span>
+      </div>
+      <a v-for="item in categories"
+        class="ui-btn item"
+        v-on:click="choose(item.slug)"
+        v-link="{name: item.slug, params: {id: ''}}">
+
+        {{ item.name }}
+      </a>
+    </template>
+    <template v-if="!showCategory">
+      <div class="ui-btn header" v-if="!showCategory" v-on:click="open">
+        {{ category }}
+      </div>
+      <div class="ui-item list">
+        <ul>
+          <li v-for="link in links">
+            <a v-link="link.target">
+              {{ link.name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -19,6 +33,12 @@
 import {dictionary} from './lookup'
 
 export default {
+  data() {
+    return {
+      categories: dictionary,
+      showCategory: false
+    }
+  },
   computed: {
     dictionary() {
       return dictionary[this.$route.name];
@@ -47,6 +67,14 @@ export default {
       });
       links.sort((a, b) => a.name.localeCompare(b.name));
       return links;
+    }
+  },
+  methods: {
+    open() {
+      this.showCategory = true;
+    },
+    choose() {
+      this.showCategory = false;
     }
   }
 }
@@ -80,6 +108,14 @@ export default {
 .sidebar ul li a:hover, .sidebar ul li a.v-link-active {
   color: black;
   background-image: url(../img/btn.png)
+}
+
+.header.ui-btn {
+  border-radius: 7px;
+}
+
+.item.ui-btn {
+  margin: 1px 3px;
 }
 
 .list.ui-item {

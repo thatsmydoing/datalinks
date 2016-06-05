@@ -22,6 +22,9 @@ router.map({
   }
 })
 router.redirect({
-  '*': '/tech/biogenetics'
+  '/concept/': '/concept/altitude',
+  '/adv-concept/': '/adv-concept/altitude-advanced',
+  '/tech/': '/tech/adaptive-doctrine',
+  '*': '/concept/'
 })
 router.start(App, 'app');

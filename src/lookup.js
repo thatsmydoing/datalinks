@@ -25,9 +25,9 @@ function addCategory(slug, name, entries, offset) {
   dictionary[slug] = category;
 }
 
-addCategory('tech', 'Technologies', techs, 140000);
 addCategory('concept', 'Basic Concepts', concepts, 0);
 addCategory('adv-concept', 'Advanced Concepts', advConcepts, 10000);
+addCategory('tech', 'Technologies', techs, 140000);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
