@@ -1,13 +1,18 @@
 <template>
   <div class="tech-view">
-    <div class="tech-container">
-      <tech-card v-for="tech in prerequisites" v-ref:prerequisites :tech="tech"></tech-card>
+    <div class="tech-tree">
+      <div class="tech-container">
+        <tech-card v-for="tech in prerequisites" v-ref:prerequisites :tech="tech"></tech-card>
+      </div>
+      <arrow-container :hovered="hovered" :arrows="prerequisiteArrows"></arrow-container>
+      <tech-main-card :tech="current" v-ref:current :is-hovering="hovered != null"></tech-main-card>
+      <arrow-container :hovered="hovered" :arrows="successorArrows"></arrow-container>
+      <div class="tech-container">
+        <tech-card v-for="tech in successors" v-ref:successors :tech="tech"></tech-card>
+      </div>
     </div>
-    <arrow-container :hovered="hovered" :arrows="prerequisiteArrows"></arrow-container>
-    <tech-main-card :tech="current" v-ref:current :is-hovering="hovered != null"></tech-main-card>
-    <arrow-container :hovered="hovered" :arrows="successorArrows"></arrow-container>
-    <div class="tech-container">
-      <tech-card v-for="tech in successors" v-ref:successors :tech="tech"></tech-card>
+    <div class="tech-blurb">
+      {{{ blurb }}}
     </div>
   </div>
 </template>
@@ -18,6 +23,7 @@ import TechMainCard from './TechMainCard.vue'
 import ArrowContainer from './ArrowContainer.vue'
 
 import {getTechById, getTechBySlug} from './lookup'
+import {asHtml} from './markup'
 import {debounce} from 'lodash'
 
 export default {
@@ -42,6 +48,9 @@ export default {
     },
     successors() {
       return this.current.successors.map(getTechById);
+    },
+    blurb() {
+      return asHtml(this.current.blurb);
     }
   },
   methods: {
@@ -86,6 +95,13 @@ export default {
 <style>
 .tech-view {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tech-tree {
+  display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
 }
@@ -94,5 +110,11 @@ export default {
   display: flex;
   flex-direction: column;
   width: 228px;
+}
+
+.blurb {
+  color: #588c2c;
+  white-space: pre-wrap;
+  width: 500px;
 }
 </style>
