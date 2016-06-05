@@ -26,7 +26,7 @@ export function asHtml(text) {
   let result = '';
   let preserve = true;
   text.split('\n').forEach(line => {
-    if(line.startsWith('^*')) {
+    if(line.startsWith('^*') || line.startsWith('^(')) {
       if(!preserve) {
         result += '\n';
       }
