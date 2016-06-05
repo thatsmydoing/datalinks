@@ -3,15 +3,24 @@
     <div class="inner-container">
       <h2>{{ tech.name }}</h2>
       <h3 :class="tech.direction">{{ tech.direction }} {{ tech.level }}</h3>
+      <img :src="image" />
     </div>
   </div>
 </template>
 
 <script>
+import {padStart} from 'lodash'
+
 export default {
   props: {
     isHovering: Boolean,
     tech: Object
+  },
+  computed: {
+    image() {
+      const num = padStart(this.tech.index, 3, '0');
+      return require('../img/tech/tech'+num+'.png');
+    }
   }
 }
 </script>
@@ -23,7 +32,7 @@ export default {
   border: solid 2px #314e2c;
   border-radius: 10px;
 
-  width: 220px;
+  width: 270px;
 
   margin: 5px 0px;
 }
@@ -38,7 +47,7 @@ export default {
   align-items: center;
   justify-content: center;
 
-  width: 200px;
+  width: 250px;
 
   border: solid 2px #233b22;
   border-radius: 7px;

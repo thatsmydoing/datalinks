@@ -9,3 +9,7 @@ build: e8d48c
 conquer: da8677
 discover: adc4c0
 explore: 588c2c
+build-bright: dcac34
+conquer-bright: e02c14
+discover-bright: cadcd3
+explore-bright: 749c38
