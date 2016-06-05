@@ -66,8 +66,12 @@ export default {
     },
     links() {
       let links = this.list.map(item => {
+        var name = item.name;
+        if(item.category == 'project') {
+          name = name.replace(/^The /, '')
+        }
         return {
-          name: item.name,
+          name: name,
           target: {
             name: item.category,
             params: { id: item.slug }

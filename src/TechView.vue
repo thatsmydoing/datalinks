@@ -11,7 +11,7 @@
         <tech-card v-for="tech in successors" v-ref:successors :tech="tech"></tech-card>
       </div>
     </div>
-    <blurb-box :tech="current"></blurb-box>
+    <blurb-box :item="current"></blurb-box>
   </div>
 </template>
 

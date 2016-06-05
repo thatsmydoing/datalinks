@@ -1,6 +1,6 @@
 <template>
-  <div class="tech-blurb">
-    <markup-view :text="tech.blurb"></markup-view>
+  <div class="blurb">
+    <markup-view :text="item.blurb"></markup-view>
     <span v-if="canPlay" class="play" v-on:click="play">
       <span></span>
     </span>
@@ -21,11 +21,27 @@ export default {
     }
   },
   props: {
-    tech: Object
+    item: Object
   },
   computed: {
     audio() {
-      return 'dist/voices/tech'+this.tech.index+'.mp3';
+      let folder = 'none';
+      let index = this.item.index;
+      switch(this.item.category) {
+        case 'tech':
+          folder = 'tech';
+          break;
+        case 'facility':
+          folder = 'fac';
+          if(index > 60) {
+            index -= 31;
+          }
+          else if(index > 33) {
+            index = index * 10;
+          }
+          break;
+      }
+      return 'dist/voices/'+folder+index+'.mp3';
     }
   },
   methods: {
@@ -41,7 +57,7 @@ export default {
 </script>
 
 <style scoped>
-.tech-blurb {
+.blurb {
   position: relative;
 }
 
@@ -74,8 +90,9 @@ export default {
 </style>
 
 <style>
-.tech-blurb .markup {
+.blurb .markup {
   color: #588c2c;
   width: 500px;
+  font-size: 12px;
 }
 </style>

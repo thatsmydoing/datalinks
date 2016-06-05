@@ -1,4 +1,4 @@
-import {techs, concepts, advConcepts} from './data'
+import {techs, concepts, advConcepts, baseFacilities, secretProjects} from './data'
 import {assign, trim} from 'lodash'
 
 let linkMap = {};
@@ -8,7 +8,12 @@ function addCategory(slug, name, entries, offset) {
   const list = entries.map(function(item) {
     return assign({
       category: slug,
-      slug: trim(item.name.toLowerCase().replace(/[()\/\s]+/g, '-'), '-')
+      slug: trim(item.name
+        .toLowerCase()
+        .replace(/[()\/\s]+/g, '-')
+        .replace(/['.]/g, '')
+        .replace(/^the-/, '')
+      , '-')
     }, item);
   });
   const bySlug = {};
@@ -28,6 +33,8 @@ function addCategory(slug, name, entries, offset) {
 addCategory('concept', 'Basic Concepts', concepts, 0);
 addCategory('adv-concept', 'Advanced Concepts', advConcepts, 10000);
 addCategory('tech', 'Technologies', techs, 140000);
+addCategory('facility', 'Base Facilities', baseFacilities, 100000);
+addCategory('project', 'Secret Projects', secretProjects, 100070);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
@@ -41,6 +48,9 @@ export function getBySlug(category, slug) {
 }
 
 export function getByMarkupLink(id) {
+  if(id >= 110000 && id < 120000) {
+    id -= 10000;
+  }
   return linkMap[id];
 }
 
