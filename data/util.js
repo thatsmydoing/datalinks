@@ -21,7 +21,12 @@ function getEntries(type, text) {
   return results;
 }
 
+function splitComma(text, limit) {
+  return text.split(/,\s*/);
+}
+
 module.exports = {
-  getList: getList,
-  getEntries: getEntries
+  getList,
+  getEntries,
+  splitComma
 }
