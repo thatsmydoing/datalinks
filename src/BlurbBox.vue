@@ -1,10 +1,10 @@
 <template>
   <div class="tech-blurb">
     <markup-view :text="tech.blurb"></markup-view>
-    <span class="play" v-on:click="play">
+    <span v-if="canPlay" class="play" v-on:click="play">
       <span></span>
     </span>
-    <audio id="audio" :src="audio"></audio>
+    <audio id="audio" :src="audio" v-on:canplay="ready"></audio>
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
   components: {
     MarkupView
   },
+  data() {
+    return {
+      canPlay: false
+    }
+  },
   props: {
     tech: Object
   },
@@ -24,6 +29,9 @@ export default {
     }
   },
   methods: {
+    ready(event) {
+      this.canPlay = true;
+    },
     play() {
       const el = this.$el.querySelector('#audio');
       el.play();
