@@ -76,31 +76,8 @@ body {
   align-items: stretch;
 }
 
-::-webkit-scrollbar {
-  margin: 4px;
-  width: 20px;
-  background-color: black;
-}
-::-webkit-scrollbar-thumb {
-  background-image: url('../img/scroll-thumb.png');
-  background-clip: content-box;
-  border: 2px solid transparent;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-button:start {
-  height: 21px;
-  background-image: url('../img/scroll-start.png');
-}
-::-webkit-scrollbar-button:start:hover {
-  background-image: url('../img/scroll-start-hover.png');
-}
-::-webkit-scrollbar-button:end {
-  height: 21px;
-  background-image: url('../img/scroll-end.png');
-}
-::-webkit-scrollbar-button:end:hover {
-  background-image: url('../img/scroll-end-hover.png');
-}
+@import './scrollbar.css'
+
 </style>
 
 <style scoped>
