@@ -8,6 +8,7 @@ function readData(name) {
 
 var alphax = readData('alphax');
 var blurbsx = readData('blurbsx');
+var conceptsx = readData('conceptsx');
 
 var techInput = util.getList('TECHNOLOGY', alphax);
 
@@ -128,7 +129,23 @@ util.getEntries('TECH', blurbsx).forEach(function(item) {
   techlist[item.index].blurb = item.entry;
 });
 
+var concepts = util.getList('TITLES', conceptsx).map(function(title, index) {
+  return { index: index, name: title };
+});
+util.getEntries('CONCEPT', conceptsx).forEach(function(item) {
+  concepts[item.index].text = item.entry;
+});
+
+var advConcepts = util.getList('ADVTITLES', conceptsx).map(function(title, index) {
+  return { index: index, name: title };
+});
+util.getEntries('ADVCONCEPT', conceptsx).forEach(function(item) {
+  advConcepts[item.index].text = item.entry;
+});
+
 var output = 'module.exports = ' + JSON.stringify({
-  techs: validTechs
+  techs: validTechs,
+  concepts: concepts,
+  advConcepts: advConcepts
 });
 fs.writeFileSync('../src/data.js', output);
