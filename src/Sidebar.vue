@@ -4,6 +4,7 @@
       <div class="ui-item ui-header">
         <span class="title">Categories</span>
       </div>
+      <span class="ui-btn item" v-on:click="choose('all')">All Categories</span>
       <a v-for="item in categories"
         class="ui-btn item"
         v-on:click="choose(item.slug)"
@@ -31,11 +32,13 @@
 
 <script>
 import {dictionary} from './lookup'
+import {flatMap} from 'lodash'
 
 export default {
   data() {
     return {
       categories: dictionary,
+      showAll: true,
       showCategory: false
     }
   },
@@ -44,24 +47,30 @@ export default {
       return dictionary[this.$route.name];
     },
     category() {
+      if(this.showAll) {
+        return 'All Categories';
+      }
       if(this.dictionary) {
         return this.dictionary.name;
       }
       return 'Unknown';
     },
     list() {
+      if(this.showAll) {
+        return flatMap(dictionary, (item) => item.list);
+      }
       if(this.dictionary) {
         return this.dictionary.list;
       }
       return [];
     },
     links() {
-      let links = this.list.map(tech => {
+      let links = this.list.map(item => {
         return {
-          name: tech.name,
+          name: item.name,
           target: {
-            name: this.$route.name,
-            params: { id: tech.slug }
+            name: item.category,
+            params: { id: item.slug }
           }
         }
       });
@@ -73,7 +82,8 @@ export default {
     open() {
       this.showCategory = true;
     },
-    choose() {
+    choose(category) {
+      this.showAll = category == 'all';
       this.showCategory = false;
     }
   }
