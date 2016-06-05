@@ -11,25 +11,24 @@
         <tech-card v-for="tech in successors" v-ref:successors :tech="tech"></tech-card>
       </div>
     </div>
-    <div class="tech-blurb">
-      {{{ blurb }}}
-    </div>
+    <blurb-box :tech="current"></blurb-box>
   </div>
 </template>
 
 <script>
 import TechCard from './TechCard.vue'
 import TechMainCard from './TechMainCard.vue'
+import BlurbBox from './BlurbBox.vue'
 import ArrowContainer from './ArrowContainer.vue'
 
 import {getTechById, getTechBySlug} from './lookup'
-import {asHtml} from './markup'
 import {debounce} from 'lodash'
 
 export default {
   components: {
     TechCard,
     TechMainCard,
+    BlurbBox,
     ArrowContainer
   },
   data () {
@@ -48,9 +47,6 @@ export default {
     },
     successors() {
       return this.current.successors.map(getTechById);
-    },
-    blurb() {
-      return asHtml(this.current.blurb);
     }
   },
   methods: {
@@ -110,11 +106,5 @@ export default {
   display: flex;
   flex-direction: column;
   width: 228px;
-}
-
-.blurb {
-  color: #588c2c;
-  white-space: pre-wrap;
-  width: 500px;
 }
 </style>
