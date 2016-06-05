@@ -1,6 +1,6 @@
 <template>
   <div class="tech-blurb">
-    {{{ blurb }}}
+    <partial :name="blurb"></partial>
     <span class="play" v-on:click="play">
       <span></span>
     </span>
@@ -66,9 +66,8 @@ export default {
 </style>
 
 <style>
-.blurb {
+.tech-blurb .markup {
   color: #588c2c;
-  white-space: pre-wrap;
   width: 500px;
 }
 </style>

@@ -76,8 +76,11 @@ body {
   align-items: stretch;
 }
 
-@import './scrollbar.css'
+@import './scrollbar.css';
 
+.markup {
+  white-space: pre-wrap;
+}
 </style>
 
 <style scoped>

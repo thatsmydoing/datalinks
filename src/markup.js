@@ -1,25 +1,40 @@
+import Vue from 'vue'
+import sha1 from 'sha1'
+
 function replaceItalic(text) {
   return text.replace(/{(.*?)}/g, '<em>$1</em>');
 }
 
 export function asHtml(text) {
   let result = '';
-  let first = true;
+  let preserve = true;
   text.split('\n').forEach(line => {
-    if(line.startsWith('^')) {
-      if(!first) {
+    if(line.startsWith('^*')) {
+      if(!preserve) {
         result += '\n';
       }
       result += line.substring(1);
+      preserve = false;
+    }
+    else if(line.startsWith('^')) {
+      if(!preserve) {
+        result += '\n';
+      }
+      result += line.substring(1);
+      result += '\n';
+      preserve = true;
     }
     else {
-      if(!first && !/\s$/.test(result)) {
+      if(!preserve && !/\s$/.test(result)) {
         result += ' ';
       }
       result += line;
+      preserve = false;
     }
-    first = false;
   });
   result = replaceItalic(result);
-  return '<pre class="blurb">'+result+'</pre>'
+  result = '<pre class="markup">'+result+'</pre>';
+  let id = sha1(result);
+  Vue.partial(id, result);
+  return id;
 }
