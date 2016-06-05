@@ -5,3 +5,7 @@ inner-radius: 233b22
 blue-text: 688cc4
 green-text: 588c2c
 link-text: b8c060
+build: e8d48c
+conquer: da8677
+discover: adc4c0
+explore: 588c2c
