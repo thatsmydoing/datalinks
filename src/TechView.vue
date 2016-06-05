@@ -21,7 +21,7 @@ import TechMainCard from './TechMainCard.vue'
 import BlurbBox from './BlurbBox.vue'
 import ArrowContainer from './ArrowContainer.vue'
 
-import {getTechById, getTechBySlug} from './lookup'
+import {getTechById, getBySlug} from './lookup'
 import {debounce} from 'lodash'
 
 export default {
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     current() {
-      return getTechBySlug(this.$route.params.id);
+      return getBySlug('tech', this.$route.params.id);
     },
     prerequisites() {
       return this.current.prerequisites.map(getTechById);

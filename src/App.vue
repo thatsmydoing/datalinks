@@ -15,7 +15,7 @@
 <script>
 import Sidebar from './Sidebar.vue'
 
-import {getTechBySlug} from './lookup'
+import {getBySlug} from './lookup'
 
 export default {
   components: {
@@ -23,8 +23,9 @@ export default {
   },
   computed: {
     title() {
-      if(this.$route.name == 'tech') {
-        return getTechBySlug(this.$route.params.id).name;
+      const item = getBySlug(this.$route.name, this.$route.params.id);
+      if(item) {
+        return item.name;
       }
       return 'Unknown';
     }

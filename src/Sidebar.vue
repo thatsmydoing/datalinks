@@ -16,31 +16,37 @@
 </template>
 
 <script>
-import {techList} from './lookup'
+import {dictionary} from './lookup'
 
 export default {
   computed: {
+    dictionary() {
+      return dictionary[this.$route.name];
+    },
     category() {
-      if(this.$route.name == 'tech') {
-        return 'Technologies';
+      if(this.dictionary) {
+        return this.dictionary.name;
       }
       return 'Unknown';
     },
-    links() {
-      if(this.$route.name == 'tech') {
-        let links = techList.map(tech => {
-          return {
-            name: tech.name,
-            target: {
-              name: 'tech',
-              params: { id: tech.slug }
-            }
-          }
-        });
-        links.sort((a, b) => a.name.localeCompare(b.name));
-        return links;
+    list() {
+      if(this.dictionary) {
+        return this.dictionary.list;
       }
       return [];
+    },
+    links() {
+      let links = this.list.map(tech => {
+        return {
+          name: tech.name,
+          target: {
+            name: this.$route.name,
+            params: { id: tech.slug }
+          }
+        }
+      });
+      links.sort((a, b) => a.name.localeCompare(b.name));
+      return links;
     }
   }
 }
