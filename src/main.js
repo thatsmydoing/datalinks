@@ -12,4 +12,7 @@ router.map({
     component: TechView
   }
 })
+router.redirect({
+  '*': '/tech/biogenetics'
+})
 router.start(App, 'app');
