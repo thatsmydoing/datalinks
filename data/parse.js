@@ -1,4 +1,5 @@
 var fs = require('fs');
+var _ = require('lodash');
 
 function readData(name) {
   return fs.readFileSync(name+'.txt', { encoding: 'ASCII' }).replace(/\r/g, '');
@@ -60,10 +61,17 @@ var techlist = techInput
   if(flags.charAt(8) == '1') {
     special.push('FREE_TECH');
   }
+
+  weights = _.mapValues(weights, parseInt);
+  var weightList = _.toPairs(weights).map(function(a) {
+    return { name: a[0], value: a[1] }
+  });
+  var direction = _.maxBy(weightList, 'value').name;
   return {
     id: id,
     index: index,
     name: name,
+    direction: direction,
     weights: weights,
     prerequisites: prereqs,
     successors: [],
@@ -79,12 +87,43 @@ var techs = {};
 validTechs.forEach(function(tech) {
   techs[tech.id] = tech;
 });
+
+function techById(id) {
+  return techs[id];
+}
+
 validTechs.forEach(function(tech) {
-  tech.prerequisites.forEach(function(prereqId) {
-    var prereq = techs[prereqId];
+  tech.prerequisites.map(techById).forEach(function(prereq) {
     prereq.successors.push(tech.id);
   });
 });
+
+
+var queue = techlist.filter(function(tech) {
+  return tech.prerequisites.length == 0;
+});
+while(queue.length > 0) {
+  var tech = queue.shift();
+  if(tech.level) {
+    continue;
+  }
+  if(tech.prerequisites.length == 0) {
+    tech.level = 1;
+  }
+  else {
+    var prerequisites = tech.prerequisites.map(techById);
+    if(_.every(prerequisites, 'level')) {
+      tech.level = 1 + _.max(_.map(prerequisites, 'level'))
+    }
+  }
+
+  if(tech.level) {
+    queue = queue.concat(tech.successors.map(techById));
+  }
+  else {
+    queue.push(tech);
+  }
+}
 
 var blurbRegex = /##.*\n#(TECH|FAC)(\d+)\n([\s\S]*?)\n\n/mg
 var blurbMatch;
