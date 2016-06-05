@@ -1,6 +1,6 @@
 <template>
   <div class="tech-blurb">
-    <partial :name="blurb"></partial>
+    <markup-view :text="tech.blurb"></markup-view>
     <span class="play" v-on:click="play">
       <span></span>
     </span>
@@ -9,16 +9,16 @@
 </template>
 
 <script>
-import {asHtml} from './markup'
+import MarkupView from './MarkupView.vue'
 
 export default {
+  components: {
+    MarkupView
+  },
   props: {
     tech: Object
   },
   computed: {
-    blurb() {
-      return asHtml(this.tech.blurb);
-    },
     audio() {
       return 'dist/voices/tech'+this.tech.index+'.mp3';
     }

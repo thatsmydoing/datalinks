@@ -1,23 +1,26 @@
 <template>
   <div class="concept-view">
-    <partial :name='text'></partial>
+    <markup-view :text="text"></markup-view>
   </div>
 </template>
 
 <script>
-import {asHtml} from './markup';
+import MarkupView from './MarkupView.vue'
 import {getBySlug} from './lookup'
 
 export default {
+  components: {
+    MarkupView
+  },
   computed: {
     concept() {
       return getBySlug(this.$route.name, this.$route.params.id);
     },
     text() {
       if(this.concept) {
-        return asHtml(this.concept.text);
+        return this.concept.text;
       }
-      return asHtml('No Data');
+      return 'No Data';
     }
   }
 }
