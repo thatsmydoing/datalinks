@@ -4,7 +4,7 @@
       <tech-card v-for="tech in prerequisites" v-ref:prerequisites :tech="tech"></tech-card>
     </div>
     <arrow-container :hovered="hovered" :arrows="prerequisiteArrows"></arrow-container>
-    <tech-card :tech="current" v-ref:current :is-hovering="hovered != null" :main="true"></tech-card>
+    <tech-main-card :tech="current" v-ref:current :is-hovering="hovered != null"></tech-main-card>
     <arrow-container :hovered="hovered" :arrows="successorArrows"></arrow-container>
     <div class="tech-container">
       <tech-card v-for="tech in successors" v-ref:successors :tech="tech"></tech-card>
@@ -14,6 +14,7 @@
 
 <script>
 import TechCard from './TechCard.vue'
+import TechMainCard from './TechMainCard.vue'
 import ArrowContainer from './ArrowContainer.vue'
 
 import {getTechById, getTechBySlug} from './lookup'
@@ -22,6 +23,7 @@ import {debounce} from 'lodash'
 export default {
   components: {
     TechCard,
+    TechMainCard,
     ArrowContainer
   },
   data () {

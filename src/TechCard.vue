@@ -13,10 +13,6 @@ export default {
     isHovering: {
       type: Boolean,
       default: false
-    },
-    main: {
-      type: Boolean,
-      default: false
     }
   },
   methods: {
@@ -25,20 +21,18 @@ export default {
     }
   },
   ready() {
-    if(!this.main) {
-      setTimeout(() => {
-        var el = this.$el;
-        if(el == el.parentElement.querySelector(':hover')) {
-          this.$dispatch('hover', this.tech.id);
-        }
-      }, 0);
-      this.$dispatch('redraw');
-    }
+    setTimeout(() => {
+      var el = this.$el;
+      if(el == el.parentElement.querySelector(':hover')) {
+        this.$dispatch('hover', this.tech.id);
+      }
+    }, 0);
+    this.$dispatch('redraw');
   }
 }
 </script>
 
-<style>
+<style scoped>
 .outer-container {
   display: inline-block;
   padding: 2px;
