@@ -7,7 +7,7 @@ import FacilityView from './FacilityView.vue'
 import TerraformView from './TerraformView.vue'
 
 import {chain, map} from 'lodash'
-import {dictionary} from './lookup'
+import {getBySlug, dictionary} from './lookup'
 
 Vue.use(VueRouter)
 
@@ -52,4 +52,11 @@ const redirect = chain(dictionary)
 
 router.map(routeMap);
 router.redirect(redirect)
+router.beforeEach(({to, abort, next}) => {
+  const item = getBySlug(to.name, to.params.id);
+  if(!item) {
+    abort('404');
+  }
+  next();
+})
 router.start(App, 'app');
