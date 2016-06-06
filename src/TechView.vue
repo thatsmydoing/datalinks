@@ -88,7 +88,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .tech-view {
   display: flex;
   flex-direction: column;

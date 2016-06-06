@@ -1,5 +1,5 @@
 <template>
-  <div class="concept-view">
+  <div class="info-panel">
     <markup-view :text="text"></markup-view>
   </div>
 </template>
@@ -25,26 +25,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.concept-view {
-  width: 100%;
-  overflow-y: auto;
-  min-height: 0px;
-}
-
-.concept-view .markup {
-  color: #588c2c;
-  font-size: 16px;
-  font-family: 'sans-serif';
-}
-
-.concept-view .markup a {
-  color: #b8c060;
-}
-
-.concept-view .markup em {
-  font-style: normal;
-  color: #b8c060;
-}
-</style>

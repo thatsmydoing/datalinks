@@ -94,5 +94,6 @@ export default {
   color: #588c2c;
   width: 500px;
   font-size: 12px;
+  font-family: monospace;
 }
 </style>

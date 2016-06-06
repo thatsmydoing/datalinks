@@ -1,0 +1,22 @@
+.info-panel {
+  width: 100%;
+  overflow-y: auto;
+  min-height: 0px;
+
+  color: #588c2c;
+  font-size: 16px;
+  font-family: 'sans-serif';
+}
+
+.info-panel a[href] {
+  color: #b8c060;
+}
+
+.info-panel .markup {
+  font-family: 'sans-serif';
+}
+
+.info-panel .markup em {
+  font-style: normal;
+  color: #b8c060;
+}

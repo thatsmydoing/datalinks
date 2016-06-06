@@ -1,5 +1,5 @@
 <template>
-  <div class="terraform-view">
+  <div class="terraform-view info-panel">
     <span>Turns to Complete: {{ terraform.turns }}</span>
     <span class="prereq">Prerequisite: <a v-link="prerequisiteLink">{{ prerequisite }}</a></span>
     <markup-view :text="text"></markup-view>
@@ -48,32 +48,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .terraform-view {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  overflow-y: auto;
-  min-height: 0px;
-  color: #588c2c;
-  font-size: 16px;
-  font-family: 'sans-serif';
-}
-
-.terraform-view a[href] {
-  color: #b8c060;
-}
-
-.terraform-view .markup {
-  font-family: 'sans-serif';
-}
-
-.terraform-view .markup a {
-  color: #b8c060;
-}
-
-.terraform-view .markup em {
-  font-style: normal;
-  color: #b8c060;
 }
 </style>

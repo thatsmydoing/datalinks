@@ -1,5 +1,5 @@
 <template>
-  <div class="facility-view">
+  <div class="facility-view info-panel">
     <div class="main">
       <div class="general">
         <img :src="image" />
@@ -75,38 +75,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .facility-view {
-  width: 100%;
-  overflow-y: auto;
-  min-height: 0px;
-
   display: flex;
   flex-direction: column;
-  color: #588c2c;
-  font-size: 16px;
-  font-family: 'sans-serif';
 }
 
-.facility-view a[href] {
-  color: #b8c060;
-}
-
-.facility-view .main .markup {
-  font-family: 'sans-serif';
-}
-
-.facility-view .main .markup em {
-  font-style: normal;
-  color: #b8c060;
-}
-
-.facility-view .blurb {
-  align-self: center;
-}
-</style>
-
-<style scoped>
 .main {
   flex: 1;
 }
@@ -129,4 +103,7 @@ export default {
   margin-top: 16px;
 }
 
+.blurb {
+  align-self: center;
+}
 </style>
