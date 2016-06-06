@@ -1,4 +1,11 @@
-import {techs, concepts, advConcepts, baseFacilities, secretProjects} from './data'
+import {
+  techs,
+  concepts,
+  advConcepts,
+  baseFacilities,
+  secretProjects,
+  terraforms
+} from './data'
 import {assign, trim} from 'lodash'
 
 let linkMap = {};
@@ -35,6 +42,7 @@ addCategory('adv-concept', 'Advanced Concepts', advConcepts, 10000);
 addCategory('tech', 'Technologies', techs, 140000);
 addCategory('facility', 'Base Facilities', baseFacilities, 100000);
 addCategory('project', 'Secret Projects', secretProjects, 100070);
+addCategory('terraform', 'Terraforming', terraforms, 90000);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);

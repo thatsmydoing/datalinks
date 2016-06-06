@@ -4,6 +4,7 @@ import App from './App.vue'
 import TechView from './TechView.vue'
 import ConceptView from './ConceptView.vue'
 import FacilityView from './FacilityView.vue'
+import TerraformView from './TerraformView.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,10 @@ router.map({
   '/project/:id': {
     name: 'project',
     component: FacilityView
+  },
+  '/terraform/:id': {
+    name: 'terraform',
+    component: TerraformView
   }
 })
 router.redirect({
@@ -36,6 +41,7 @@ router.redirect({
   '/tech/': '/tech/adaptive-doctrine',
   '/facility/': '/facility/aerospace-complex',
   '/project/': '/project/ascent-to-transcendence',
+  '/terraform/': '/terraform/build-mag-tube',
   '*': '/concept/'
 })
 router.start(App, 'app');
