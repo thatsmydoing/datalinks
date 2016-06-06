@@ -1,27 +1,13 @@
 <template>
   <div class="info-panel">
-    <markup-view :text="text"></markup-view>
+    <markup-view :text="item.text"></markup-view>
   </div>
 </template>
 
 <script>
-import MarkupView from './MarkupView.vue'
-import {getBySlug} from './lookup'
+import ViewMixin from './ViewMixin'
 
 export default {
-  components: {
-    MarkupView
-  },
-  computed: {
-    concept() {
-      return getBySlug(this.$route.name, this.$route.params.id);
-    },
-    text() {
-      if(this.concept) {
-        return this.concept.text;
-      }
-      return 'No Data';
-    }
-  }
+  mixins: [ ViewMixin ]
 }
 </script>

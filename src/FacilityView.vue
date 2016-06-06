@@ -4,54 +4,36 @@
       <div class="general">
         <img :src="image" />
         <div class="info">
-          <span>Cost: {{ facility.cost * 10 }}</span>
-          <span v-if="facility.category == 'facility'">Maintenance: {{ facility.maintenance }}</span>
-          <span class="prereq">Prerequisite: <item-link :item="facility.prerequisite"></span>
+          <span>Cost: {{ item.cost * 10 }}</span>
+          <span v-if="item.category == 'facility'">Maintenance: {{ item.maintenance }}</span>
+          <span class="prereq">Prerequisite: <item-link :item="item.prerequisite"></span>
         </div>
       </div>
-      <markup-view :text="text"></markup-view>
+      <markup-view :text="item.text"></markup-view>
     </div>
-    <blurb-box :item="facility"></blurb-box>
+    <blurb-box :item="item"></blurb-box>
   </div>
 </template>
 
 <script>
 import {padStart} from 'lodash'
+import ViewMixin from './ViewMixin'
 import BlurbBox from './BlurbBox.vue'
-import MarkupView from './MarkupView.vue'
-import ItemLink from './ItemLink.vue'
-import {getBySlug} from './lookup'
 
 export default {
+  mixins: [ ViewMixin ],
   components: {
-    BlurbBox,
-    MarkupView,
-    ItemLink
+    BlurbBox
   },
   computed: {
-    facility() {
-      return getBySlug(this.$route.name, this.$route.params.id);
-    },
     image() {
-      const num = padStart(this.facility.index, 3, '0');
+      const num = padStart(this.item.index, 3, '0');
       if(this.$route.name == 'facility') {
         return require('../img/facs/fac'+num+'.png');
       }
       else {
         return require('../img/projs/proj'+num+'.png');
       }
-    },
-    text() {
-      if(this.facility) {
-        return this.facility.text;
-      }
-      return 'No Data';
-    },
-    blurb() {
-      if(this.facility) {
-        return this.facility.blurb;
-      }
-      return 'No Data';
     }
   }
 }

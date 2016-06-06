@@ -1,32 +1,16 @@
 <template>
   <div class="terraform-view info-panel">
-    <span>Turns to Complete: {{ terraform.turns }}</span>
-    <span class="prereq">Prerequisite: <item-link :item="terraform.prerequisite"></item-link></span>
-    <markup-view :text="text"></markup-view>
+    <span>Turns to Complete: {{ item.turns }}</span>
+    <span class="prereq">Prerequisite: <item-link :item="item.prerequisite"></item-link></span>
+    <markup-view :text="item.text"></markup-view>
   </div>
 </template>
 
 <script>
-import MarkupView from './MarkupView.vue'
-import ItemLink from './ItemLink.vue'
-import {getBySlug} from './lookup'
+import ViewMixin from './ViewMixin'
 
 export default {
-  components: {
-    MarkupView,
-    ItemLink
-  },
-  computed: {
-    terraform() {
-      return getBySlug(this.$route.name, this.$route.params.id);
-    },
-    text() {
-      if(this.terraform) {
-        return this.terraform.text;
-      }
-      return 'No Data';
-    }
-  }
+  mixins: [ ViewMixin ]
 }
 </script>
 
