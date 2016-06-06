@@ -6,7 +6,7 @@
         <div class="info">
           <span>Cost: {{ facility.cost * 10 }}</span>
           <span v-if="facility.category == 'facility'">Maintenance: {{ facility.maintenance }}</span>
-          <span class="prereq">Prerequisite: <a v-link="prerequisiteLink">{{ prerequisite }}</a></span>
+          <span class="prereq">Prerequisite: <item-link :item="facility.prerequisite"></span>
         </div>
       </div>
       <markup-view :text="text"></markup-view>
@@ -19,36 +19,18 @@
 import {padStart} from 'lodash'
 import BlurbBox from './BlurbBox.vue'
 import MarkupView from './MarkupView.vue'
-import {getBySlug, getTechById} from './lookup'
+import ItemLink from './ItemLink.vue'
+import {getBySlug} from './lookup'
 
 export default {
   components: {
     BlurbBox,
-    MarkupView
+    MarkupView,
+    ItemLink
   },
   computed: {
     facility() {
       return getBySlug(this.$route.name, this.$route.params.id);
-    },
-    prerequisite() {
-      const prereq = this.facility.prerequisite;
-      if(prereq == 'None') {
-        return 'None';
-      }
-      else {
-        return getTechById(prereq).name;
-      }
-    },
-    prerequisiteLink() {
-      let prereq = this.facility.prerequisite;
-      if(prereq == 'None') {
-        return null;
-      }
-      prereq = getTechById(prereq);
-      return {
-        name: 'tech',
-        params: { id: prereq.slug }
-      }
     },
     image() {
       const num = padStart(this.facility.index, 3, '0');

@@ -2,13 +2,13 @@
   <div class="tech-view">
     <div class="tech-tree">
       <div class="tech-container">
-        <tech-card v-for="tech in prerequisites" v-ref:prerequisites :tech="tech"></tech-card>
+        <tech-card v-for="tech in current.prerequisites" v-ref:prerequisites :tech="tech"></tech-card>
       </div>
       <arrow-container :hovered="hovered" :arrows="prerequisiteArrows"></arrow-container>
       <tech-main-card :tech="current" v-ref:current :is-hovering="hovered != null"></tech-main-card>
       <arrow-container :hovered="hovered" :arrows="successorArrows"></arrow-container>
       <div class="tech-container">
-        <tech-card v-for="tech in successors" v-ref:successors :tech="tech"></tech-card>
+        <tech-card v-for="tech in current.successors" v-ref:successors :tech="tech"></tech-card>
       </div>
     </div>
     <blurb-box :item="current"></blurb-box>
@@ -21,7 +21,7 @@ import TechMainCard from './TechMainCard.vue'
 import BlurbBox from './BlurbBox.vue'
 import ArrowContainer from './ArrowContainer.vue'
 
-import {getTechById, getBySlug} from './lookup'
+import {getBySlug} from './lookup'
 import {debounce} from 'lodash'
 
 export default {
@@ -41,12 +41,6 @@ export default {
   computed: {
     current() {
       return getBySlug('tech', this.$route.params.id);
-    },
-    prerequisites() {
-      return this.current.prerequisites.map(getTechById);
-    },
-    successors() {
-      return this.current.successors.map(getTechById);
     }
   },
   methods: {

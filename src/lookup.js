@@ -47,9 +47,23 @@ addCategory('terraform', 'Terraforming', terraforms, 90000);
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
 
-export function getTechById(id) {
+function getTechById(id) {
+  if(id == 'None') return null;
   return techById[id];
 }
+
+function resolveTechs(item) {
+  item.prerequisite = getTechById(item.prerequisite);
+}
+
+dictionary.tech.list.forEach(tech => {
+  tech.prerequisites = tech.prerequisites.map(getTechById);
+  tech.successors = tech.successors.map(getTechById);
+});
+
+dictionary.facility.list.forEach(resolveTechs);
+dictionary.project.list.forEach(resolveTechs);
+dictionary.terraform.list.forEach(resolveTechs);
 
 export function getBySlug(category, slug) {
   return dictionary[category].bySlug[slug];
