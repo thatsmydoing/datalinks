@@ -5,6 +5,7 @@ import TechView from './TechView.vue'
 import ConceptView from './ConceptView.vue'
 import FacilityView from './FacilityView.vue'
 import TerraformView from './TerraformView.vue'
+import FactionView from './FactionView.vue'
 
 import {chain, map} from 'lodash'
 import {getBySlug, dictionary} from './lookup'
@@ -18,7 +19,8 @@ const viewMapping = {
   'adv-concept': ConceptView,
   facility: FacilityView,
   project: FacilityView,
-  terraform: TerraformView
+  terraform: TerraformView,
+  faction: FactionView
 };
 const routeMap = chain(dictionary)
   .map(value => {

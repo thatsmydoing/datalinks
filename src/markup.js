@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import sha1 from 'sha1'
+import {escape} from 'lodash'
 import {getByMarkupLink} from './lookup'
+
+function escapeTags(text) {
+  return text.replace(/[^(\$LINK)]<\w+>/, escape);
+}
 
 function replaceItalic(text) {
   return text.replace(/{(.*?)}/g, '<em>$1</em>');
@@ -26,6 +31,7 @@ export function asHtml(text) {
   let result = '';
   let preserve = true;
   text.split('\n').forEach(line => {
+    line = line.trim();
     if(line.startsWith('^*') || line.startsWith('^(')) {
       if(!preserve) {
         result += '\n';
@@ -49,6 +55,7 @@ export function asHtml(text) {
       preserve = false;
     }
   });
+  result = escapeTags(result);
   result = replaceItalic(result);
   result = replaceLinks(result);
   result = '<pre class="markup">'+result+'</pre>';

@@ -4,7 +4,8 @@ import {
   advConcepts,
   baseFacilities,
   secretProjects,
-  terraforms
+  terraforms,
+  factions
 } from './data'
 import {assign, trim} from 'lodash'
 
@@ -43,6 +44,7 @@ addCategory('tech', 'Technologies', techs, 140000);
 addCategory('facility', 'Base Facilities', baseFacilities, 100000);
 addCategory('project', 'Secret Projects', secretProjects, 100070);
 addCategory('terraform', 'Terraforming', terraforms, 90000);
+addCategory('faction', 'Faction Profiles', factions, 150000);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
@@ -72,6 +74,9 @@ export function getBySlug(category, slug) {
 export function getByMarkupLink(id) {
   if(id >= 110000 && id < 120000) {
     id -= 10000;
+  }
+  if(id == 150006 || id == 150007) {
+    id -= -7;
   }
   return linkMap[id];
 }

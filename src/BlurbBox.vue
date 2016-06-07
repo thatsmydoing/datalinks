@@ -40,6 +40,10 @@ export default {
             index = index * 10;
           }
           break;
+        case 'faction':
+          folder = '';
+          index = this.item.id;
+          break;
       }
       return 'dist/voices/'+folder+index+'.mp3';
     }
