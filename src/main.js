@@ -6,6 +6,7 @@ import ConceptView from './ConceptView.vue'
 import FacilityView from './FacilityView.vue'
 import TerraformView from './TerraformView.vue'
 import FactionView from './FactionView.vue'
+import SocietyModelView from './SocietyModelView.vue'
 
 import {chain, map} from 'lodash'
 import {getBySlug, dictionary} from './lookup'
@@ -20,7 +21,9 @@ const viewMapping = {
   facility: FacilityView,
   project: FacilityView,
   terraform: TerraformView,
-  faction: FactionView
+  faction: FactionView,
+  'soc-effect': ConceptView,
+  'soc-model': SocietyModelView
 };
 const routeMap = chain(dictionary)
   .map(value => {
@@ -40,7 +43,9 @@ const redirect = chain(dictionary)
   .map(value => {
     const category = value.slug;
     let slugs = map(value.list, 'slug');
-    slugs.sort();
+    if(category != 'soc-model') {
+      slugs.sort();
+    }
     return [
       '/'+category+'/',
       '/'+category+'/'+slugs[0]

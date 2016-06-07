@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-wrapper sidebar">
+  <div class="ui-wrapper sidebar" :class="showing">
     <template v-if="showCategory">
       <div class="ui-item ui-header">
         <span class="title">Categories</span>
@@ -20,7 +20,7 @@
       <div class="ui-item list">
         <ul>
           <li v-for="link in links">
-            <a v-link="link.target">
+            <a :class="link.className" v-link="link.target">
               {{ link.name }}
             </a>
           </li>
@@ -46,6 +46,14 @@ export default {
     dictionary() {
       return dictionary[this.$route.name];
     },
+    showing() {
+      if(this.showAll) {
+        return 'all';
+      }
+      else {
+        return this.$route.name;
+      }
+    },
     category() {
       if(this.showAll) {
         return 'All Categories';
@@ -67,18 +75,25 @@ export default {
     links() {
       let links = this.list.map(item => {
         var name = item.name;
+        var className = item.category;
         if(item.category == 'project') {
           name = name.replace(/^The /, '')
         }
+        if(item.category == 'soc-model') {
+          className += ' color'+Math.floor(item.index/5);
+        }
         return {
           name: name,
+          className,
           target: {
             name: item.category,
             params: { id: item.slug }
           }
         }
       });
-      links.sort((a, b) => a.name.localeCompare(b.name));
+      if(this.showing != 'soc-model') {
+        links.sort((a, b) => a.name.localeCompare(b.name));
+      }
       return links;
     }
   },
@@ -137,6 +152,19 @@ export default {
   padding: 0px;
   padding-right: 2px;
   min-height: 0px;
+}
+
+.soc-model .color0 {
+  color: white;
+}
+.soc-model .color1 {
+  color: cyan;
+}
+.soc-model .color2 {
+  color: magenta;
+}
+.soc-model .color3 {
+  color: blue;
 }
 </style>
 

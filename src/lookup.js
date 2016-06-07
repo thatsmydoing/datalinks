@@ -5,7 +5,9 @@ import {
   baseFacilities,
   secretProjects,
   terraforms,
-  factions
+  factions,
+  socEffects,
+  socModels
 } from './data'
 import {assign, trim} from 'lodash'
 
@@ -45,6 +47,8 @@ addCategory('facility', 'Base Facilities', baseFacilities, 100000);
 addCategory('project', 'Secret Projects', secretProjects, 100070);
 addCategory('terraform', 'Terraforming', terraforms, 90000);
 addCategory('faction', 'Faction Profiles', factions, 150000);
+addCategory('soc-effect', 'Society Effects', socEffects, 130000);
+addCategory('soc-model', 'Society Models', socModels, 120000);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
@@ -66,6 +70,16 @@ dictionary.tech.list.forEach(tech => {
 dictionary.facility.list.forEach(resolveTechs);
 dictionary.project.list.forEach(resolveTechs);
 dictionary.terraform.list.forEach(resolveTechs);
+
+const effectByName = {};
+dictionary['soc-effect'].list.forEach(eff => effectByName[eff.name] = eff);
+dictionary['soc-model'].list.forEach(model => {
+  if(model.effects) {
+    model.effects.forEach(eff => {
+      eff.effect = effectByName[eff.effect];
+    });
+  }
+});
 
 export function getBySlug(category, slug) {
   return dictionary[category].bySlug[slug];
