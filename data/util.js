@@ -1,10 +1,12 @@
 var _ = require('lodash');
 
 function getList(header, text) {
-  var regex = new RegExp('^#'+header+'[\\s\\S]*?\n\n', 'm');
-  var lines = regex.exec(text)[0].trim().split('\n');
-  lines.shift();
-  return lines;
+  return getEntry(header, text).split('\n');
+}
+
+function getEntry(header, text) {
+  var regex = new RegExp('^#'+header+'\n([\\s\\S]*?)\n\n', 'm');
+  return regex.exec(text)[1].trim();
 }
 
 function getEntries(type, text) {
@@ -40,6 +42,7 @@ function splitComma(text, limit) {
 
 module.exports = {
   getList,
+  getEntry,
   getEntries,
   parseWeights,
   splitComma

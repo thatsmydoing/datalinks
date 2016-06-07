@@ -10,7 +10,7 @@ function parse(name, data, index) {
     id: name,
     name: arr[0],
     index: index,
-    blurb: util.getList('BLURB', data).join('\n'),
+    blurb: util.getEntry('BLURB', data),
     overview: datalinks[0].entry,
     effects: datalinks[1].entry
   }
@@ -38,7 +38,7 @@ function parseDetailed(name, data) {
     },
     aggressiveness: parseInt(arr[7]),
     weights: util.parseWeights(arr, 8),
-    blurb: util.getList('BLURB', data).join('\n'),
+    blurb: util.getEntry('BLURB', data),
     overview: datalinks[0].entry,
     effects: datalinks[1].entry
   }
