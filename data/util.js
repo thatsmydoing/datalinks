@@ -10,13 +10,13 @@ function getEntry(header, text) {
 }
 
 function getEntries(type, text) {
-  var regex = new RegExp('^#'+type+'(\\d+)\n([\\s\\S]*?)\n\n', 'mg');
+  var regex = new RegExp('^#'+type+'(\\d+)\n(\n|([\\s\\S]*?)\n\n)', 'mg');
 
   var match;
   var results = [];
   while((match = regex.exec(text)) != null) {
     var num = parseInt(match[1]);
-    var entry = match[2];
+    var entry = _.trimEnd(match[2], '\n');
     results.push({
       index: num,
       entry: entry
