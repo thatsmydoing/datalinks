@@ -26,13 +26,7 @@ function parse(alphax, blurbsx) {
 function parseArray(arr, index) {
   var name = arr[0];
   var id = arr[1];
-  var weights = {
-    conquer: arr[2],
-    discover: arr[3],
-    build: arr[4],
-    explore: arr[5]
-  };
-  weights = _.mapValues(weights, parseInt);
+  var weights = util.parseWeights(arr, 2);
   var prereqs = [];
   if(arr[6] != 'None') {
     prereqs.push(arr[6]);

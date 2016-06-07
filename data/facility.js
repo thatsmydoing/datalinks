@@ -58,12 +58,7 @@ function parseSecretProject(a, index) {
   var result = parseFacility(a, index);
   result.index = index;
   result.aggressiveness = parseInt(a[6]);
-  result.weights = {
-    conquer: parseInt(a[7]),
-    discover: parseInt(a[8]),
-    build: parseInt(a[9]),
-    explore: parseInt(a[10])
-  }
+  result.weights = util.parseWeights(a, 7);
   return result;
 }
 
