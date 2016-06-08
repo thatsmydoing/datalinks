@@ -7,6 +7,7 @@ var facility = require('./facility');
 var terraform = require('./terraform');
 var faction = require('./faction');
 var society = require('./society');
+var ability = require('./ability');
 
 function readData(name) {
   return fs.readFileSync(name+'.txt', { encoding: 'ASCII' }).replace(/\r/g, '');
@@ -43,6 +44,7 @@ var factions = _factions.map((name, index) => {
   return faction.parse(name, data, index+1);
 });
 var societies = society.parse(alphax, helpx, techs);
+var abilities = ability.parse(alphax, helpx);
 
 var output = 'module.exports = ' + JSON.stringify({
   techs: techs,
@@ -53,6 +55,7 @@ var output = 'module.exports = ' + JSON.stringify({
   terraforms: terraforms,
   factions: factions,
   socEffects: societies.effects,
-  socModels: societies.models
+  socModels: societies.models,
+  abilities: abilities
 });
 fs.writeFileSync('../src/data.js', output);
