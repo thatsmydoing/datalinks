@@ -25,6 +25,15 @@ function getEntries(type, text) {
   return results;
 }
 
+function parseFlags(effects, flags) {
+  return _.flatMap(effects, (effect, index) => {
+    if(flags.charAt(index) == '1') {
+      return [effect];
+    }
+    return [];
+  });
+}
+
 function parseWeights(arr, offset) {
   var weights = {
     conquer: arr[offset],
@@ -44,6 +53,7 @@ module.exports = {
   getList,
   getEntry,
   getEntries,
+  parseFlags,
   parseWeights,
   splitComma
 }

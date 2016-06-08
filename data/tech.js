@@ -23,6 +23,18 @@ function parse(alphax, blurbsx) {
   return list;
 }
 
+var flagEffects = [
+  'FUNGUS_NUTRIENTS',
+  'FUNGUS_MINERALS',
+  'FUNGUS_ENERGY',
+  'GENE_DEFENSE',
+  'ALLOW_GENE_ATROCITY',
+  'REVEAL_MAP',
+  'INCREASE_COMMERCE',
+  'PROBE_TEAM_IMPROVE',
+  'FREE_TECH'
+];
+
 function parseArray(arr, index) {
   var name = arr[0];
   var id = arr[1];
@@ -34,7 +46,7 @@ function parseArray(arr, index) {
   if(arr[7] != 'None') {
     prereqs.push(arr[7]);
   }
-  var special = parseFlags(arr[8]);
+  var special = util.parseFlags(flagEffects, arr[8]);
   var direction = getDirection(weights);
 
   return {
@@ -47,38 +59,6 @@ function parseArray(arr, index) {
     successors: [],
     special
   }
-}
-
-function parseFlags(flags) {
-  var special = [];
-  if(flags.charAt(0) == '1') {
-    special.push('FUNGUS_NUTRIENTS');
-  }
-  if(flags.charAt(1) == '1') {
-    special.push('FUNGUS_MINERALS');
-  }
-  if(flags.charAt(2) == '1') {
-    special.push('FUNGUS_ENERGY');
-  }
-  if(flags.charAt(3) == '1') {
-    special.push('GENE_DEFENSE');
-  }
-  if(flags.charAt(4) == '1') {
-    special.push('ALLOW_GENE_ATROCITY');
-  }
-  if(flags.charAt(5) == '1') {
-    special.push('REVEAL_MAP');
-  }
-  if(flags.charAt(6) == '1') {
-    special.push('INCREASE_COMMERCE');
-  }
-  if(flags.charAt(7) == '1') {
-    special.push('PROBE_TEAM_IMPROVE');
-  }
-  if(flags.charAt(8) == '1') {
-    special.push('FREE_TECH');
-  }
-  return special;
 }
 
 function getDirection(weights) {
