@@ -8,6 +8,7 @@ var terraform = require('./terraform');
 var faction = require('./faction');
 var society = require('./society');
 var ability = require('./ability');
+var unitParts = require('./unit-parts');
 
 function readData(name) {
   return fs.readFileSync(name+'.txt', { encoding: 'ASCII' }).replace(/\r/g, '');
@@ -45,6 +46,7 @@ var factions = _factions.map((name, index) => {
 });
 var societies = society.parse(alphax, helpx, techs);
 var abilities = ability.parse(alphax, helpx);
+var unitParts = unitParts.parse(alphax, helpx);
 
 var output = 'module.exports = ' + JSON.stringify({
   techs: techs,
@@ -56,6 +58,15 @@ var output = 'module.exports = ' + JSON.stringify({
   factions: factions,
   socEffects: societies.effects,
   socModels: societies.models,
-  abilities: abilities
+  abilities: abilities,
+  chassis: unitParts.chassis,
+  reactors: unitParts.reactor,
+  weapons: unitParts.weapon,
+  armors: unitParts.armor,
+
+  help: {
+    reactor: unitParts.reactorHelp,
+    armor: unitParts.armorHelp
+  }
 });
 fs.writeFileSync('../src/data.js', output);
