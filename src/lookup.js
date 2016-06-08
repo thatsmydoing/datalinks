@@ -7,7 +7,8 @@ import {
   terraforms,
   factions,
   socEffects,
-  socModels
+  socModels,
+  abilities
 } from './data'
 import {assign, trim} from 'lodash'
 
@@ -49,6 +50,7 @@ addCategory('terraform', 'Terraforming', terraforms, 90000);
 addCategory('faction', 'Faction Profiles', factions, 150000);
 addCategory('soc-effect', 'Society Effects', socEffects, 130000);
 addCategory('soc-model', 'Society Models', socModels, 120000);
+addCategory('ability', 'Special Abilities', abilities, 80000);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
@@ -70,6 +72,7 @@ dictionary.tech.list.forEach(tech => {
 dictionary.facility.list.forEach(resolveTechs);
 dictionary.project.list.forEach(resolveTechs);
 dictionary.terraform.list.forEach(resolveTechs);
+dictionary.ability.list.forEach(resolveTechs);
 
 const effectByName = {};
 dictionary['soc-effect'].list.forEach(eff => effectByName[eff.name] = eff);

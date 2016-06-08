@@ -7,6 +7,7 @@ import FacilityView from './FacilityView.vue'
 import TerraformView from './TerraformView.vue'
 import FactionView from './FactionView.vue'
 import SocietyModelView from './SocietyModelView.vue'
+import AbilityView from './AbilityView.vue'
 
 import {chain, map} from 'lodash'
 import {getBySlug, dictionary} from './lookup'
@@ -23,7 +24,8 @@ const viewMapping = {
   terraform: TerraformView,
   faction: FactionView,
   'soc-effect': ConceptView,
-  'soc-model': SocietyModelView
+  'soc-model': SocietyModelView,
+  ability: AbilityView
 };
 const routeMap = chain(dictionary)
   .map(value => {
