@@ -9,6 +9,7 @@ var faction = require('./faction');
 var society = require('./society');
 var ability = require('./ability');
 var unitParts = require('./unit-parts');
+var unit = require('./unit');
 
 function readData(name) {
   return fs.readFileSync(name+'.txt', { encoding: 'ASCII' }).replace(/\r/g, '');
@@ -47,6 +48,7 @@ var factions = _factions.map((name, index) => {
 var societies = society.parse(alphax, helpx, techs);
 var abilities = ability.parse(alphax, helpx);
 var unitParts = unitParts.parse(alphax, helpx);
+var units = unit.parse(alphax, helpx);
 
 var output = 'module.exports = ' + JSON.stringify({
   techs: techs,
@@ -63,6 +65,7 @@ var output = 'module.exports = ' + JSON.stringify({
   reactors: unitParts.reactor,
   weapons: unitParts.weapon,
   armors: unitParts.armor,
+  units: units,
 
   help: {
     reactor: unitParts.reactorHelp,
