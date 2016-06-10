@@ -50,6 +50,7 @@ var types = [
 function parseChassis(arr, index) {
   return {
     name: arr[0],
+    id: arr[0],
     index: index,
     moves: parseInt(arr[8]),
     type: types[parseInt(arr[9])],
@@ -72,6 +73,7 @@ function parseReactor(arr, index) {
   return {
     name: arr[0],
     index: index,
+    id: arr[1],
     prefix: arr[1],
     power: parseInt(arr[2]),
     prerequisite: arr[3]
@@ -88,6 +90,7 @@ function parseWeapon(arr, index) {
   return {
     name: arr[0],
     index: index,
+    id: arr[1],
     prefix: arr[1],
     power: parseInt(arr[2]),
     type: weaponModes[parseInt(arr[3])],
@@ -107,6 +110,7 @@ function parseArmor(arr, index) {
   return {
     name: arr[0],
     index: index,
+    id: arr[1],
     prefix: arr[1],
     armor: parseInt(arr[2]),
     type: armorModes[parseInt(arr[3])],
