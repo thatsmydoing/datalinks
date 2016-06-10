@@ -50,19 +50,19 @@ function addCategory(slug, name, entries, offset) {
 
 addCategory('concept', 'Basic Concepts', concepts, 0);
 addCategory('adv-concept', 'Advanced Concepts', advConcepts, 10000);
-addCategory('tech', 'Technologies', techs, 140000);
-addCategory('facility', 'Base Facilities', baseFacilities, 100000);
-addCategory('project', 'Secret Projects', secretProjects, 100070);
-addCategory('terraform', 'Terraforming', terraforms, 90000);
-addCategory('faction', 'Faction Profiles', factions, 150000);
-addCategory('soc-effect', 'Society Effects', socEffects, 130000);
-addCategory('soc-model', 'Society Models', socModels, 120000);
-addCategory('ability', 'Special Abilities', abilities, 80000);
+addCategory('unit', 'Basic Unit Types', units, 30000);
 addCategory('chassis', 'Chassis Types', chassis, 40000);
 addCategory('reactor', 'Reactor Types', reactors, 50000);
 addCategory('weapon', 'Weapons and Modules', weapons, 60000);
 addCategory('armor', 'Armor Types', armors, 70000);
-addCategory('unit', 'Basic Unit Types', units, 30000);
+addCategory('ability', 'Special Abilities', abilities, 80000);
+addCategory('faction', 'Faction Profiles', factions, 150000);
+addCategory('tech', 'Technologies', techs, 140000);
+addCategory('soc-effect', 'Society Effects', socEffects, 130000);
+addCategory('soc-model', 'Society Models', socModels, 120000);
+addCategory('project', 'Secret Projects', secretProjects, 100070);
+addCategory('facility', 'Base Facilities', baseFacilities, 100000);
+addCategory('terraform', 'Terraforming', terraforms, 90000);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
