@@ -8,7 +8,12 @@ import {
   factions,
   socEffects,
   socModels,
-  abilities
+  abilities,
+  chassis,
+  reactors,
+  weapons,
+  armors,
+  help
 } from './data'
 import {assign, trim} from 'lodash'
 
@@ -51,6 +56,10 @@ addCategory('faction', 'Faction Profiles', factions, 150000);
 addCategory('soc-effect', 'Society Effects', socEffects, 130000);
 addCategory('soc-model', 'Society Models', socModels, 120000);
 addCategory('ability', 'Special Abilities', abilities, 80000);
+addCategory('chassis', 'Chassis Types', chassis, 40000);
+addCategory('reactor', 'Reactor Types', reactors, 50000);
+addCategory('weapon', 'Weapons and Modules', weapons, 60000);
+addCategory('armor', 'Armor Types', armors, 70000);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
@@ -73,6 +82,10 @@ dictionary.facility.list.forEach(resolveTechs);
 dictionary.project.list.forEach(resolveTechs);
 dictionary.terraform.list.forEach(resolveTechs);
 dictionary.ability.list.forEach(resolveTechs);
+dictionary.chassis.list.forEach(resolveTechs);
+dictionary.reactor.list.forEach(resolveTechs);
+dictionary.weapon.list.forEach(resolveTechs);
+dictionary.armor.list.forEach(resolveTechs);
 
 const effectByName = {};
 dictionary['soc-effect'].list.forEach(eff => effectByName[eff.name] = eff);
@@ -96,6 +109,10 @@ export function getByMarkupLink(id) {
     id -= -7;
   }
   return linkMap[id];
+}
+
+export function getCategoryHelp(category) {
+  return help[category];
 }
 
 export { dictionary };
