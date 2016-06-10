@@ -13,8 +13,10 @@ import {
   reactors,
   weapons,
   armors,
+  units,
   help
 } from './data'
+import {buildIndex} from '../data/struct'
 import {assign, trim} from 'lodash'
 
 let linkMap = {};
@@ -60,12 +62,19 @@ addCategory('chassis', 'Chassis Types', chassis, 40000);
 addCategory('reactor', 'Reactor Types', reactors, 50000);
 addCategory('weapon', 'Weapons and Modules', weapons, 60000);
 addCategory('armor', 'Armor Types', armors, 70000);
+addCategory('unit', 'Basic Unit Types', units, 30000);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
 
+const unavailable = {
+  name: 'Not Available',
+  slug: ''
+};
+
 function getTechById(id) {
   if(id == 'None') return null;
+  if(id == 'Disable') return unavailable;
   return techById[id];
 }
 
@@ -86,6 +95,16 @@ dictionary.chassis.list.forEach(resolveTechs);
 dictionary.reactor.list.forEach(resolveTechs);
 dictionary.weapon.list.forEach(resolveTechs);
 dictionary.armor.list.forEach(resolveTechs);
+dictionary.unit.list.forEach(resolveTechs);
+
+const chassisById = buildIndex(dictionary.chassis.list, 'id');
+const weaponById = buildIndex(dictionary.weapon.list, 'id');
+const armorById = buildIndex(dictionary.armor.list, 'id');
+dictionary.unit.list.forEach(unit => {
+  unit.chassis = chassisById.find(unit.chassis);
+  unit.weapon = weaponById.find(unit.weapon);
+  unit.armor = armorById.find(unit.armor);
+});
 
 const effectByName = {};
 dictionary['soc-effect'].list.forEach(eff => effectByName[eff.name] = eff);

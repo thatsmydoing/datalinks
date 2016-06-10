@@ -12,6 +12,7 @@ import ChassisView from './ChassisView.vue'
 import ReactorView from './ReactorView.vue'
 import WeaponView from './WeaponView.vue'
 import ArmorView from './ArmorView.vue'
+import UnitView from './UnitView.vue'
 
 import {chain, map} from 'lodash'
 import {getBySlug, dictionary} from './lookup'
@@ -33,7 +34,8 @@ const viewMapping = {
   chassis: ChassisView,
   reactor: ReactorView,
   weapon: WeaponView,
-  armor: ArmorView
+  armor: ArmorView,
+  unit: UnitView
 };
 const routeMap = chain(dictionary)
   .map(value => {
