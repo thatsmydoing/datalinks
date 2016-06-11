@@ -60,7 +60,7 @@ addCategory('faction', 'Faction Profiles', factions, 150000);
 addCategory('tech', 'Tech Advances', techs, 140000);
 addCategory('soc-effect', 'Society Effects', socEffects, 130000);
 addCategory('soc-model', 'Society Models', socModels, 120000);
-addCategory('project', 'Secret Projects', secretProjects, 100070);
+addCategory('project', 'Secret Projects', secretProjects, 110070);
 addCategory('facility', 'Base Facilities', baseFacilities, 100000);
 addCategory('terraform', 'Terraforming', terraforms, 90000);
 
@@ -131,9 +131,6 @@ export function getBySlug(category, slug) {
 }
 
 export function getByMarkupLink(id) {
-  if(id >= 110000 && id < 120000) {
-    id -= 10000;
-  }
   if(id == 150006 || id == 150007) {
     id -= -7;
   }
