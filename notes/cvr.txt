@@ -1,0 +1,125 @@
+a - foil photon armor?
+aa - alien infantry armor
+aa01 - alien foil armor
+aa-rover - alien rover armor
+aat* - ??? could not open file
+aa-wing - alien needlejet armor
+aa-wing0 - alien needlejet armor
+acolpod - alien colony pod unit
+acp** - ??? per reactor?
+at - ???
+atp - ???
+av* - ??? could not open file
+ax - alien infantry model
+
+drop - colony pod unit body
+droplet - colony pod module
+
+funload - fungal payload
+
+ni - isle of the deep
+nlc - locusts of chiron
+nw - mindworm
+ptmod - probe team module
+resbolt - resonance bolt
+reslaser - resonance laser
+
+sags - antigrav struts
+sas - ???
+scd - carrier deck
+scj - comm jammer
+sdp - drop pods
+select - ??? rings
+sft - fungicide tanks
+sfta - fungicide tanks alien
+sht - hypnotic trance
+sp-disswave - dissonance wave
+sp-marined - marine detachment
+sp-nanoo - ???
+sp-soporific - soporific gas pods
+srb - repair bay
+ssf - super former
+ssfa - super former aliens
+
+tecload - tectonic payload
+
+va01 - foil armor
+
+vb - ???
+vbp - ???
+
+vcl - ???
+vclt00 - treads
+
+vct - copter landing attachment
+vct** - copter armor
+vctb - copter propellers
+vctp - copter landing gear
+
+vcu - cruiser ???
+vcua** - cruiser armor
+vcup - cruiser top
+vcuw - water ripple?
+vfl - foil base
+
+vgmc - ??? chassis thing
+vgmcp - ??? (colony pod?)
+vgmt - treads
+vgmtp - ??? antenna thing
+vgs - gravship propeller
+vgsp - gravship wings
+
+vhr - heavy artillery
+
+vhta** - hovertank armor middle
+vhtp - hovertank ???
+vhtta** - hovertank armor top
+vhttap - hovertank ???
+vhttp - hovertank ???
+vht-vbp - hovertank ???
+
+vi - infantry model
+vipta** - infantry standard armor
+viptapsi - infantry psi armor
+viptasgn - infantry stasis armor
+viptawal - infantry photon wall armor
+viptr** - infantry reactor per level
+
+VJT** - needlejet armor (numbers only 00 and 01)
+VJTp - needlejet thrusters
+vlights - ??? some lights
+
+vm - missile chassis
+vpbr** - missile head per level
+vpt - vehicle probe team (person model)
+vr** - rover reactor per level
+vrcp** - rover cockpit per level
+
+vsp - rover chassis (wheels + engine)
+vspa01 - rover armor?
+vspa02 - rover armor?
+vsptb - pair of donuts
+vsptf - pair of donuts
+
+vt - former body
+vta - former body (alien?)
+
+vw00 - hand weapons
+vw01 - laser
+vw02 - particle impactor
+vw03 - missile launcher
+vw04 - gatling laser
+vw05 - chaos gun
+vw06 - fusion laser
+vw07 - tachyon bolt
+vw08 - plasma shard
+vw09 - quantum laser
+vw10 - graviton gun
+vw11 - singularity laser
+vw12 - ???
+vw13 - planet buster
+vw14 - string disruptor
+vwnaa - ???
+vwnst - supply
+vwntt - troop transport
+vwntu - terraform unit
