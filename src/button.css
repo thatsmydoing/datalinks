@@ -6,6 +6,9 @@
   color: black;
   text-align: center;
   font-weight: bold;
+
+  user-select: none;
+  cursor: pointer;
 }
 
 a.ui-btn {
