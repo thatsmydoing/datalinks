@@ -23,6 +23,9 @@ export default {
   },
   computed: {
     title() {
+      if(this.$route.name == 'about') {
+        return 'Datalinks';
+      }
       const item = getBySlug(this.$route.name, this.$route.params.id);
       if(item) {
         return item.name;

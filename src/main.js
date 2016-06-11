@@ -13,6 +13,7 @@ import ReactorView from './ReactorView.vue'
 import WeaponView from './WeaponView.vue'
 import ArmorView from './ArmorView.vue'
 import UnitView from './UnitView.vue'
+import AboutView from './AboutView.vue'
 
 import {chain, map} from 'lodash'
 import {getBySlug, dictionary} from './lookup'
@@ -49,6 +50,12 @@ const routeMap = chain(dictionary)
     ]
   })
   .fromPairs()
+  .assign({
+    '/about': {
+      name: 'about',
+      component: AboutView
+    }
+  })
   .value();
 
 const redirect = chain(dictionary)
@@ -65,13 +72,17 @@ const redirect = chain(dictionary)
   })
   .fromPairs()
   .assign({
-    '*': '/concept/'
+    '*': '/about'
   })
   .value();
 
 router.map(routeMap);
 router.redirect(redirect)
 router.beforeEach(({to, abort, next}) => {
+  if(to.name == 'about') {
+    next();
+    return;
+  }
   const item = getBySlug(to.name, to.params.id);
   if(!item) {
     abort('404');

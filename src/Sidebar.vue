@@ -4,6 +4,13 @@
       <div class="ui-item ui-header">
         <span class="title">Categories</span>
       </div>
+      <a
+        class="ui-btn item"
+        v-on:click="choose('about')"
+        v-link="{name: 'about'}">
+
+        About
+      </a>
       <span class="ui-btn item" v-on:click="choose('all')">All Categories</span>
       <a v-for="item in categories"
         class="ui-btn item"
@@ -102,7 +109,7 @@ export default {
       this.showCategory = true;
     },
     choose(category) {
-      this.showAll = category == 'all';
+      this.showAll = category == 'all' || category == 'about';
       this.showCategory = false;
     }
   },
@@ -111,10 +118,12 @@ export default {
       setTimeout(() => {
         let scrollContainer = this.$els.scroll;
         let activeLink = this.$el.querySelector(".v-link-active");
-        let linkTop =
-          activeLink.getBoundingClientRect().top -
-          scrollContainer.getBoundingClientRect().top;
-        scrollContainer.scrollTop = scrollContainer.scrollTop + linkTop - 10;
+        if(scrollContainer && activeLink) {
+          let linkTop =
+            activeLink.getBoundingClientRect().top -
+            scrollContainer.getBoundingClientRect().top;
+          scrollContainer.scrollTop = scrollContainer.scrollTop + linkTop - 10;
+        }
       }, 0);
     }
   }
