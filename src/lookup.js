@@ -57,7 +57,7 @@ addCategory('weapon', 'Weapons and Modules', weapons, 60000);
 addCategory('armor', 'Armor Types', armors, 70000);
 addCategory('ability', 'Special Abilities', abilities, 80000);
 addCategory('faction', 'Faction Profiles', factions, 150000);
-addCategory('tech', 'Technologies', techs, 140000);
+addCategory('tech', 'Tech Advances', techs, 140000);
 addCategory('soc-effect', 'Society Effects', socEffects, 130000);
 addCategory('soc-model', 'Society Models', socModels, 120000);
 addCategory('project', 'Secret Projects', secretProjects, 100070);
