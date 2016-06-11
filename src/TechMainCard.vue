@@ -4,14 +4,42 @@
       <h2>{{ tech.name }}</h2>
       <h3 :class="tech.direction">{{ tech.direction }} {{ tech.level }}</h3>
       <img :src="image" />
+      <div class="allows" v-for="list in tech.allows">
+        <span>{{ names[$key] }}:</span>
+        <span v-for="item in list">
+          <item-link :item="item"></item-link>{{extra(item)}}<template v-if="$index < list.length - 1">,</template>
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import {padStart} from 'lodash'
+import ItemLink from './ItemLink.vue'
+
+const names = {
+  armor: 'Defenses',
+  ability: 'Abilities',
+  facility: 'Base Facilities',
+  project: 'Secret Projects',
+  weapon: 'Weapons',
+  chassis: 'Chassis Types',
+  reactor: 'Reactors',
+  unit: 'Unit Types',
+  terraform: 'Terraform',
+  'soc-model': 'Socio/Economic Model'
+}
 
 export default {
+  components: {
+    ItemLink
+  },
+  data() {
+    return {
+      names
+    }
+  },
   props: {
     isHovering: Boolean,
     tech: Object
@@ -20,6 +48,32 @@ export default {
     image() {
       const num = padStart(this.tech.index, 3, '0');
       return require('../img/tech/tech'+num+'.png');
+    }
+  },
+  methods: {
+    extra(item) {
+      let value;
+      switch(item.category) {
+        case 'chassis':
+          return ' ('+item.moves+')';
+        case 'weapon':
+          value = item.power;
+          if(value < 0) {
+            value = 'Psi';
+          }
+          if(value == 0) {
+            value = 'Equipment';
+          }
+          return ' ('+value+')';
+        case 'armor':
+          value = item.armor;
+          if(value < 0) {
+            value = 'Psi';
+          }
+          return ' ('+value+')';
+        default:
+          return '';
+      }
     }
   }
 }
@@ -63,6 +117,21 @@ export default {
 
 .inner-container h3 {
   text-transform: uppercase;
+}
+
+.inner-container img {
+  margin-bottom: 20px;
+}
+
+.allows {
+  align-self: stretch;
+  color: #588c2c;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.allows a {
+  color: #b8c060;
 }
 
 .build {

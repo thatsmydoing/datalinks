@@ -66,6 +66,7 @@ addCategory('terraform', 'Terraforming', terraforms, 90000);
 
 const techById = {};
 dictionary.tech.list.forEach(tech => techById[tech.id] = tech);
+dictionary.tech.list.forEach(tech => tech.allows = {});
 
 const unavailable = {
   name: 'Not Available',
@@ -79,7 +80,15 @@ function getTechById(id) {
 }
 
 function resolveTechs(item) {
-  item.prerequisite = getTechById(item.prerequisite);
+  if(!item.prerequisite) return;
+  let tech = getTechById(item.prerequisite);
+  item.prerequisite = tech;
+  if(tech && tech != unavailable) {
+    if(!tech.allows[item.category]) {
+      tech.allows[item.category] = [];
+    }
+    tech.allows[item.category].push(item);
+  }
 }
 
 dictionary.tech.list.forEach(tech => {
@@ -96,6 +105,7 @@ dictionary.reactor.list.forEach(resolveTechs);
 dictionary.weapon.list.forEach(resolveTechs);
 dictionary.armor.list.forEach(resolveTechs);
 dictionary.unit.list.forEach(resolveTechs);
+dictionary['soc-model'].list.forEach(resolveTechs);
 
 const chassisById = buildIndex(dictionary.chassis.list, 'id');
 const weaponById = buildIndex(dictionary.weapon.list, 'id');
