@@ -111,20 +111,31 @@ export default {
     choose(category) {
       this.showAll = category == 'all' || category == 'about';
       this.showCategory = false;
-    }
-  },
-  watch: {
-    $route(val) {
+    },
+    scrollToLink() {
       setTimeout(() => {
         let scrollContainer = this.$els.scroll;
         let activeLink = this.$el.querySelector(".v-link-active");
         if(scrollContainer && activeLink) {
-          let linkTop =
-            activeLink.getBoundingClientRect().top -
-            scrollContainer.getBoundingClientRect().top;
-          scrollContainer.scrollTop = scrollContainer.scrollTop + linkTop - 10;
+          let linkRect = activeLink.getBoundingClientRect();
+          let scrollRect = scrollContainer.getBoundingClientRect();
+          let linkTop = linkRect.top - scrollRect.top;
+          if(linkTop < 0) {
+            scrollContainer.scrollTop = scrollContainer.scrollTop + linkTop - 10;
+          }
+          else if(linkTop + linkRect.height > scrollRect.bottom) {
+            scrollContainer.scrollTop = scrollContainer.scrollTop + linkTop - scrollRect.height + linkRect.height + 10;
+          }
         }
       }, 0);
+    }
+  },
+  ready() {
+    this.scrollToLink();
+  },
+  watch: {
+    $route(val) {
+      this.scrollToLink();
     }
   }
 }
