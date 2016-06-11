@@ -18,7 +18,7 @@
         {{ category }}
       </div>
       <div class="ui-item list">
-        <ul>
+        <ul v-el:scroll>
           <li v-for="link in links">
             <a :class="link.className" v-link="link.target">
               {{ link.name }}
@@ -104,6 +104,18 @@ export default {
     choose(category) {
       this.showAll = category == 'all';
       this.showCategory = false;
+    }
+  },
+  watch: {
+    $route(val) {
+      setTimeout(() => {
+        let scrollContainer = this.$els.scroll;
+        let activeLink = this.$el.querySelector(".v-link-active");
+        let linkTop =
+          activeLink.getBoundingClientRect().top -
+          scrollContainer.getBoundingClientRect().top;
+        scrollContainer.scrollTop = scrollContainer.scrollTop + linkTop - 10;
+      }, 0);
     }
   }
 }
