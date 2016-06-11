@@ -42,6 +42,9 @@ export default {
   width: 220px;
 
   margin: 5px 0px;
+
+  user-select: none;
+  cursor: pointer;
 }
 
 .outer-container:hover {
@@ -76,5 +79,6 @@ export default {
   text-align: center;
   color: black;
   margin: 0px;
+  font-size: 20px;
 }
 </style>
