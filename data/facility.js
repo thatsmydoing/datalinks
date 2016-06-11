@@ -7,12 +7,22 @@ function parse(alphax, blurbsx, helpx) {
   var facLines = lines.slice(0, 69);
   var projLines = lines.slice(69);
 
+  function idMap(id) {
+    if(id > 100) {
+      return id / 10;
+    }
+    if(id > 33) {
+      return id + 31;
+    }
+    return id;
+  }
+
   return {
     base: parseType(
       facLines,
       parseFacility,
       'FAC',
-      id => id > 33 ? id + 31 : id,
+      idMap,
       'HELPFAC',
       blurbsx,
       helpx

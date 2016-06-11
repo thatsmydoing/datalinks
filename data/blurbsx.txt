@@ -1733,6 +1733,95 @@ the feeling that I have witnessed a form of transcendence.
 ^        -- Commissioner Pravin Lal,
 ^           "The Convergence"
 
+##Psi Gate
+#FAC330
+Go through, my children! The time of miracles is upon us. Let
+us cast off sin and walk together to the Garden of the Lord.
+With God’s mercy we shall meet again on the other side.
+^
+^        -- Sister Miriam Godwinson,
+^           "Last Testament"
+
+##Covert Ops Center
+#FAC340
+The idea first of all was to create a center without a physical
+location, more of a nexus of thought where we could trade intelligence,
+turncodes and technique. The second goal was to hide it from the very
+probe teams that used it. Nothing could be more secret than a collection
+of information that spends 99% of its existence dissolved into the ether.
+^
+^        -- Datatech Sinder Roze,
+^           "Putting the Covert in Covert Ops"
+
+##Brood Pit
+#FAC350
+Of all the employments, working in the brood pit was considered
+at once the most horrific and the most desirable. Horrific because
+of what we saw occur day after day, and because of the very nature
+of the sessile native lifeforms. Desirable because, having been chosen
+to work in the pit, you were highly unlikely to become one of its victims.
+^
+^        -- Captain Ulrik Svensgaard,
+^           "The Shadow Resonance"
+
+##Aquafarm
+#FAC360
+Juvenile Sealurks, when isolated from the collective planetary
+consciousness, perform astounding feats as underwater sheepdogs.
+Vasts schools of calorie rich Sporefish may be herded by only a
+few well trained specimens. Just don’t let them get too close to
+the fungus or they’ll turn on you like a Razorshark.
+^
+^        -- Captain Ulrik Svensgaard,
+^           "Tending the Sea"
+
+##Subsea Trunkline
+#FAC370
+Each individual pipe contains a hot slurry of minerals drawn from
+Planet’s crust, and makes a sound like rain falling on a tin roof.
+When they converge at the trunkline, the sound becomes a terrifying
+thunder, a thunder of untold wealth and power.
+^
+^        -- Captain Ulrik Svensgaard,
+^           "Tending the Sea"
+
+##Thermocline Transducer
+#FAC380
+The boundary between cold water and warm, the thermocline, has been
+important to undersea warfare for hundreds of years of man’s history.
+Now we have found a way to harness that power for constructive purposes.
+What once cloaked us can now feed us, what once shielded us from death,
+now brings us life.
+^
+^        -- Captain Ulrik Svensgaard,
+^           "The Ripple and the Wave"
+
+##Flechette Defense System
+#FAC390
+Missile attack on Zeta-5. Humans activate : first defense successful.
+Afterwards : danger posed by innovation suddenly clear.
+^
+^        -- Usurper Judaa Marr,
+^           "Human : Nature"
+
+##Subspace Generator
+#FAC400
+Resonance : comes not from individual beings, rather city as whole.
+Progenitors : not separate, lines between us blur. Resulting power :
+exponential. Brilliant beacon even in vast universe.
+^
+^        -- Caretaker Lular H’minee,
+^           "Resonance : Power"
+
+##Geosynchronous Survey Pod
+#FAC410
+The managers always talked about having the view from 30,000 feet.
+The only problem with having the view from 30,000 feet, is that at
+that height, everyone looks like ants.
+^
+^        -- Foreman Domai,
+^           "Genejack and the Beanstalk"
+
 
 
 # ; This line must remain at end of file
