@@ -5,11 +5,5 @@ export default defineConfig({
   build: {
     emptyOutDir: false,
   },
-  resolve: {
-    alias: {
-      // include template compiler
-      vue: 'vue/dist/vue.esm.browser.js',
-    },
-  },
   plugins: [vue()],
 });
