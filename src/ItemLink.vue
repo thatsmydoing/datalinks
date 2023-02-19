@@ -1,5 +1,6 @@
 <template>
-  <a v-link="target">{{ name }}</a>
+  <router-link v-if="target" :to="target">{{ name }}</router-link>
+  <span v-else>{{ name }}</span>
 </template>
 
 <script>
@@ -18,7 +19,7 @@ export default {
       return 'Unknown';
     },
     target() {
-      if(this.item) {
+      if(this.item && this.item.slug) {
         return { name: this.item.category, params: { id: this.item.slug } };
       }
       return null

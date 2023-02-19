@@ -1,13 +1,13 @@
 <template>
   <div class="map-cell">
-    <img class="tile" v-for="tile in tiles" :src="tile">
-    <img class="object" v-for="object in objects" :src="object">
+    <img class="tile" v-for="(tile, index) in tiles" :key="index" :src="tile">
+    <img class="object" v-for="(object, index) in objects" :key="index" :src="object">
   </div>
 </template>
 
 <script>
 function img(name) {
-  return require('../img/map/'+name+'.png');
+  return new URL('../img/map/'+name+'.png', import.meta.url);
 }
 
 export default {

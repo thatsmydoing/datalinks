@@ -4,32 +4,30 @@
       <div class="ui-item ui-header">
         <span class="title">Categories</span>
       </div>
-      <a
-        class="ui-btn item"
-        v-on:click="choose('about')"
-        v-link="{name: 'about'}">
-
+      <router-link class="ui-btn item" v-on:click.native="choose('about')" to="about">
         About
-      </a>
+      </router-link>
       <span class="ui-btn item" v-on:click="choose('all')">All Categories</span>
-      <a v-for="item in categories"
+      <router-link
+        v-for="item in categories"
+        :key="item.slug"
         class="ui-btn item"
-        v-on:click="choose(item.slug)"
-        v-link="{name: item.slug, params: {id: ''}}">
-
+        v-on:click.native="choose(item.slug)"
+        :to="`/${item.slug}/`"
+      >
         {{ item.name }}
-      </a>
+      </router-link>
     </template>
     <template v-if="!showCategory">
       <div class="ui-btn header" v-if="!showCategory" v-on:click="open">
         {{ category }}
       </div>
       <div class="ui-item list">
-        <ul v-el:scroll>
-          <li v-for="link in links">
-            <a :class="link.className" v-link="link.target">
+        <ul ref="scroll">
+          <li v-for="link in links" :key="link.key">
+            <router-link :class="link.className" :to="link.target">
               {{ link.name }}
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -90,6 +88,7 @@ export default {
           className += ' color'+Math.floor(item.index/5);
         }
         return {
+          key: `${item.category}-${item.slug}`,
           name: name,
           className,
           target: {
@@ -114,8 +113,8 @@ export default {
     },
     scrollToLink() {
       setTimeout(() => {
-        let scrollContainer = this.$els.scroll;
-        let activeLink = this.$el.querySelector(".v-link-active");
+        let scrollContainer = this.$refs.scroll;
+        let activeLink = this.$el.querySelector(".router-link-active");
         if(scrollContainer && activeLink) {
           let linkRect = activeLink.getBoundingClientRect();
           let scrollRect = scrollContainer.getBoundingClientRect();
@@ -130,14 +129,14 @@ export default {
       }, 0);
     }
   },
-  ready() {
+  mounted() {
     this.scrollToLink();
   },
   watch: {
     $route(val) {
       this.scrollToLink();
     }
-  }
+  },
 }
 </script>
 
@@ -166,7 +165,7 @@ export default {
   text-decoration: none;
 }
 
-.sidebar ul li a:hover, .sidebar ul li a.v-link-active {
+.sidebar ul li a:hover, .sidebar ul li a.router-link-active {
   color: black;
   background-image: url(../img/btn.png)
 }

@@ -1,14 +1,15 @@
 <template>
   <svg>
     <defs>
-      <marker id="arrow" markerWidth="13" markerHeight="13" refx="9" refy="6" orient="auto">
+      <marker id="arrow" markerWidth="13" markerHeight="13" refX="9" refY="6" orient="auto">
         <path d="M2,2 L2,11 L10,6 L2,2" />
       </marker>
-      <marker id="arrow-hover" markerWidth="13" markerHeight="13" refx="9" refy="6" orient="auto">
+      <marker id="arrow-hover" markerWidth="13" markerHeight="13" refX="9" refY="6" orient="auto">
         <path d="M2,2 L2,11 L10,6 L2,2" class="hover" />
       </marker>
     </defs>
-    <arrow v-for="arrow in arrows | orderBy hoverSort"
+    <arrow v-for="arrow in sortedArrows"
+      :key="arrow.id"
       :is-hovering="hovered == arrow.id"
       :from="arrow.from"
       :to="arrow.to">
@@ -27,6 +28,11 @@ export default {
     arrows: Array,
     height: Number,
     hovered: String
+  },
+  computed: {
+    sortedArrows() {
+      return this.arrows.sort((a, b) => this.hoverSort(a, b));
+    },
   },
   methods: {
     hoverSort(a, b) {

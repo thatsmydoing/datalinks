@@ -50,7 +50,7 @@ var abilities = ability.parse(alphax, helpx);
 var unitParts = unitParts.parse(alphax, helpx);
 var units = unit.parse(alphax, helpx);
 
-var output = 'module.exports = ' + JSON.stringify({
+const exportData = {
   techs: techs,
   concepts: concepts.basic,
   advConcepts: concepts.advanced,
@@ -71,5 +71,12 @@ var output = 'module.exports = ' + JSON.stringify({
     reactor: unitParts.reactorHelp,
     armor: unitParts.armorHelp
   }
-});
+};
+
+var output = '';
+for (const [name, data] of Object.entries(exportData)) {
+  output += `
+  export const ${name} = ${JSON.stringify(data)};
+  `;
+}
 fs.writeFileSync('../src/data.js', output);

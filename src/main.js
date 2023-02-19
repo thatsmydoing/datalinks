@@ -20,7 +20,6 @@ import {getBySlug, dictionary} from './lookup'
 
 Vue.use(VueRouter)
 
-const router = new VueRouter();
 const viewMapping = {
   tech: TechView,
   concept: ConceptView,
@@ -38,47 +37,38 @@ const viewMapping = {
   armor: ArmorView,
   unit: UnitView
 };
-const routeMap = chain(dictionary)
-  .map(value => {
-    const category = value.slug;
-    return [
-      '/'+category+'/:id',
-      {
-        name: category,
-        component: viewMapping[category]
-      }
-    ]
-  })
-  .fromPairs()
-  .assign({
-    '/about': {
-      name: 'about',
-      component: AboutView
-    }
-  })
-  .value();
 
-const redirect = chain(dictionary)
-  .map(value => {
-    const category = value.slug;
-    let slugs = map(value.list, 'slug');
-    if(category != 'soc-model') {
-      slugs.sort();
+const routes = Object.entries(dictionary).flatMap(([_, value]) => {
+  const category = value.slug;
+  const slugs = map(value.list, 'slug');
+  if(category != 'soc-model') {
+    slugs.sort();
+  }
+  return [
+    {
+      path: '/'+category+'/:id',
+      name: category,
+      component: viewMapping[category]
+    },
+    {
+      path: '/'+category+'/',
+      redirect: '/'+category+'/'+slugs[0]
     }
-    return [
-      '/'+category+'/',
-      '/'+category+'/'+slugs[0]
-    ]
-  })
-  .fromPairs()
-  .assign({
-    '*': '/about'
-  })
-  .value();
+  ];
+}).concat([
+  {
+    path: '/about',
+    name: 'about',
+    component: AboutView
+  },
+  {
+    path: '*',
+    redirect: '/about',
+  }
+]);
 
-router.map(routeMap);
-router.redirect(redirect)
-router.beforeEach(({to, abort, next}) => {
+const router = new VueRouter({ routes });
+router.beforeEach((to, _from, next) => {
   if(to.name == 'about') {
     next();
     return;
@@ -89,4 +79,9 @@ router.beforeEach(({to, abort, next}) => {
   }
   next();
 })
-router.start(App, 'app');
+
+new Vue({
+  el: 'app',
+  router,
+  render: h => h(App),
+});

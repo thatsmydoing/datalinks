@@ -16,11 +16,21 @@ import {
   units,
   help
 } from './data'
-import {buildIndex} from '../data/struct'
-import {assign, trim} from 'lodash'
+import {assign, trim, zipObject, map} from 'lodash'
 
 let linkMap = {};
 let dictionary = {};
+
+function buildIndex(list, key) {
+  var dictionary = zipObject(map(list, key), list);
+  function find(id) {
+    return dictionary[id];
+  }
+  return {
+    dictionary,
+    find
+  }
+}
 
 function addCategory(slug, name, entries, offset) {
   const list = entries.map(function(item) {

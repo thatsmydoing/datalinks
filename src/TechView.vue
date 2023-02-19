@@ -2,13 +2,27 @@
   <div class="tech-view">
     <div class="tech-tree">
       <div class="tech-container">
-        <tech-card v-for="tech in current.prerequisites" v-ref:prerequisites :tech="tech"></tech-card>
+        <tech-card
+          v-for="(tech, index) in current.prerequisites"
+          :key="index"
+          ref="prerequisites"
+          @hover="hover"
+          :tech="tech"
+        >
+        </tech-card>
       </div>
       <arrow-container :hovered="hovered" :arrows="prerequisiteArrows"></arrow-container>
-      <tech-main-card :tech="current" v-ref:current :is-hovering="hovered != null"></tech-main-card>
+      <tech-main-card :tech="current" ref="current" :is-hovering="hovered != null"></tech-main-card>
       <arrow-container :hovered="hovered" :arrows="successorArrows"></arrow-container>
       <div class="tech-container">
-        <tech-card v-for="tech in current.successors" v-ref:successors :tech="tech"></tech-card>
+        <tech-card
+          v-for="(tech, index) in current.successors"
+          :key="index"
+          ref="successors"
+          @hover="hover"
+          :tech="tech"
+        >
+        </tech-card>
       </div>
     </div>
     <blurb-box :item="current"></blurb-box>
@@ -44,7 +58,8 @@ export default {
     }
   },
   methods: {
-    _redraw: debounce((self) => {
+    redraw: debounce((self) => {
+      if (!self.$refs.current) return;
       const containerRect = self.$el.getBoundingClientRect();
       const topOffset = containerRect.top;
       const rect = self.$refs.current.$el.getBoundingClientRect();
@@ -69,15 +84,13 @@ export default {
           to: end
         }
       });
-    })
-  },
-  events: {
+    }),
     hover(on) {
       this.hovered = on;
-    },
-    redraw() {
-      this._redraw(this);
     }
+  },
+  updated() {
+    this.redraw(this);
   }
 }
 </script>

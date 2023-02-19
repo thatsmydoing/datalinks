@@ -4,7 +4,7 @@
     <template v-if="item.effects">
       <span v-if="item.effects.length == 0">No Effects</span>
       <table v-if="item.effects.length > 0">
-        <tr v-for="e in item.effects">
+        <tr v-for="(e, index) in item.effects" :key="index">
           <td class="amount">{{ e.amount }}</td>
           <td><item-link :item="e.effect"></item-link></td>
         </tr>
