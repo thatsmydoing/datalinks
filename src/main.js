@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createApp } from 'vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 import TechView from './TechView.vue'
 import ConceptView from './ConceptView.vue'
@@ -17,8 +17,6 @@ import AboutView from './AboutView.vue'
 
 import {chain, map} from 'lodash'
 import {getBySlug, dictionary} from './lookup'
-
-Vue.use(VueRouter)
 
 const viewMapping = {
   tech: TechView,
@@ -62,26 +60,29 @@ const routes = Object.entries(dictionary).flatMap(([_, value]) => {
     component: AboutView
   },
   {
-    path: '*',
+    path: '/',
+    redirect: '/about',
+  },
+  {
+    path: '/(.*)',
     redirect: '/about',
   }
 ]);
 
-const router = new VueRouter({ routes });
-router.beforeEach((to, _from, next) => {
+const router = createRouter({
+  routes,
+  history: createWebHashHistory()
+});
+router.beforeEach((to) => {
   if(to.name == 'about') {
-    next();
     return;
   }
   const item = getBySlug(to.name, to.params.id);
   if(!item) {
-    abort('404');
+    return false;
   }
-  next();
 })
 
-new Vue({
-  el: 'app',
-  router,
-  render: h => h(App),
-});
+const app = createApp(App);
+app.use(router);
+app.mount('app');

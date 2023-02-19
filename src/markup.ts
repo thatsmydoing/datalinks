@@ -1,8 +1,8 @@
-import { h, VNode, VNodeChildren } from 'vue'
+import { h, resolveComponent, VNode, VNodeArrayChildren } from 'vue'
 import { getByMarkupLink } from './lookup'
 
-function replaceTags(text: string): VNodeChildren {
-  let result: VNodeChildren = [];
+function replaceTags(text: string): VNodeArrayChildren {
+  let result: VNodeArrayChildren = [];
   let lastPos = 0;
 
   for (const match of text.matchAll(/{(.*?)}/g)) {
@@ -18,8 +18,8 @@ function replaceTags(text: string): VNodeChildren {
   return result;
 }
 
-function replaceLinks(text: string): VNodeChildren {
-  let result: VNodeChildren = [];
+function replaceLinks(text: string): VNodeArrayChildren {
+  let result: VNodeArrayChildren = [];
   let lastPos = 0;
 
   for (const match of text.matchAll(/\$LINK<([^=]+)\s*=\s*(\d+)>/g)) {
@@ -29,13 +29,11 @@ function replaceLinks(text: string): VNodeChildren {
     const item = getByMarkupLink(target);
 
     result.push(before);
-    result.push(h('router-link', {
-      props: {
-        to: {
-          name: item.category,
-          params: {
-            id: item.slug
-          }
+    result.push(h(resolveComponent('router-link'), {
+      to: {
+        name: item.category,
+        params: {
+          id: item.slug
         }
       }
     }, [link]));

@@ -137,7 +137,7 @@ dictionary['soc-model'].list.forEach(model => {
 });
 
 export function getBySlug(category, slug) {
-  return dictionary[category].bySlug[slug];
+  return dictionary[category]?.bySlug[slug];
 }
 
 export function getByMarkupLink(id) {

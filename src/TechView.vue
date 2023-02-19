@@ -60,12 +60,13 @@ export default {
   methods: {
     redraw: debounce((self) => {
       if (!self.$refs.current) return;
+
       const containerRect = self.$el.getBoundingClientRect();
       const topOffset = containerRect.top;
       const rect = self.$refs.current.$el.getBoundingClientRect();
       const mid = rect.top + rect.height / 2 - topOffset;
       self.prerequisiteArrows = self.$refs.prerequisites.map((c) => {
-        const rect = c.$el.getBoundingClientRect();
+        const rect = c.$refs.container.getBoundingClientRect();
         const start = rect.top + rect.height / 2 - topOffset;
 
         return {
@@ -75,7 +76,7 @@ export default {
         }
       });
       self.successorArrows = self.$refs.successors.map((c) => {
-        const rect = c.$el.getBoundingClientRect();
+        const rect = c.$refs.container.getBoundingClientRect();
         const end = rect.top + rect.height / 2 - topOffset;
 
         return {
@@ -88,6 +89,9 @@ export default {
     hover(on) {
       this.hovered = on;
     }
+  },
+  mounted() {
+    this.redraw(this);
   },
   updated() {
     this.redraw(this);

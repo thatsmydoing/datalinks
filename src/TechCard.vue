@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{ name: 'tech', params: {id: tech.slug} }" custom v-slot="{ navigate }">
-    <div class="outer-container" v-bind:class="{'hover': isHovering}" @click="navigate" v-on:mouseenter="hover" v-on:mouseleave="hover">
+    <div class="outer-container" ref="container" v-bind:class="{'hover': isHovering}" @click="navigate" v-on:mouseenter="hover" v-on:mouseleave="hover">
       <div class="inner-container">
         <h2>{{ tech.name }}</h2>
       </div>
@@ -22,6 +22,9 @@ export default {
       this.$emit('hover', event.type == 'mouseenter' ? this.tech.id : null);
     }
   },
+  emits: [
+    'hover',
+  ],
   mounted() {
     setTimeout(() => {
       var el = this.$el;

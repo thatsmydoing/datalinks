@@ -4,7 +4,7 @@
       <div class="ui-item ui-header">
         <span class="title">Categories</span>
       </div>
-      <router-link class="ui-btn item" v-on:click.native="choose('about')" to="about">
+      <router-link class="ui-btn item" v-on:click="choose('about')" :to="{ name: 'about' }">
         About
       </router-link>
       <span class="ui-btn item" v-on:click="choose('all')">All Categories</span>
@@ -12,7 +12,7 @@
         v-for="item in categories"
         :key="item.slug"
         class="ui-btn item"
-        v-on:click.native="choose(item.slug)"
+        v-on:click="choose(item.slug)"
         :to="`/${item.slug}/`"
       >
         {{ item.name }}
