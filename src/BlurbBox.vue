@@ -45,7 +45,7 @@ export default {
           index = this.item.id;
           break;
       }
-      return 'dist/voices/'+folder+index+'.mp3';
+      return new URL('../voices/'+folder+index+'.mp3', import.meta.url);
     }
   },
   methods: {

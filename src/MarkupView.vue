@@ -1,6 +1,6 @@
 <template>
-  <partial v-if="!viewSource" :name="rendered" v-on:keyup="keyHandle"></partial>
-  <pre class="markup" v-if="viewSource" v-on:keyup="keyHandle">{{ text }}</pre>
+  <div v-if="!viewSource" :is="rendered" v-on:keyup="keyHandle"></div>
+  <pre class="markup" v-else v-on:keyup="keyHandle">{{ text }}</pre>
 </template>
 
 <script>

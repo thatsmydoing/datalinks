@@ -1,9 +1,11 @@
 <template>
-  <div class="outer-container" v-bind:class="{'hover': isHovering}" v-link="{ name: 'tech', params: {id: tech.slug} }" v-on:mouseenter="hover" v-on:mouseleave="hover">
-    <div class="inner-container">
-      <h2>{{ tech.name }}</h2>
+  <router-link :to="{ name: 'tech', params: {id: tech.slug} }" custom v-slot="{ navigate }">
+    <div class="outer-container" v-bind:class="{'hover': isHovering}" @click="navigate" v-on:mouseenter="hover" v-on:mouseleave="hover">
+      <div class="inner-container">
+        <h2>{{ tech.name }}</h2>
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -17,17 +19,16 @@ export default {
   },
   methods: {
     hover(event) {
-      this.$dispatch('hover', event.type == 'mouseenter' ? this.tech.id : null);
+      this.$emit('hover', event.type == 'mouseenter' ? this.tech.id : null);
     }
   },
-  ready() {
+  mounted() {
     setTimeout(() => {
       var el = this.$el;
       if(el == el.parentElement.querySelector(':hover')) {
-        this.$dispatch('hover', this.tech.id);
+        this.$emit('hover', this.tech.id);
       }
     }, 0);
-    this.$dispatch('redraw');
   }
 }
 </script>

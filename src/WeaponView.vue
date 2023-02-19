@@ -20,7 +20,7 @@ export default {
   computed: {
     image() {
       let name = this.item.id.toLowerCase().replace(/ /g, '-');
-      return require('../img/weapons/'+name+'.png');
+      return new URL('../img/weapons/'+name+'.png', import.meta.url);
     },
     showCost() {
       return this.item.power != this.item.cost;

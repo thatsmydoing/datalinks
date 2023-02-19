@@ -6,7 +6,7 @@
         <div class="info">
           <span>Cost: {{ item.cost * 10 }}</span>
           <span v-if="item.category == 'facility'">Maintenance: {{ item.maintenance }}</span>
-          <span class="prereq">Prerequisite: <item-link :item="item.prerequisite"></span>
+          <span class="prereq">Prerequisite: <item-link :item="item.prerequisite"></item-link></span>
         </div>
       </div>
       <markup-view :text="item.text"></markup-view>
@@ -29,10 +29,10 @@ export default {
     image() {
       const num = padStart(this.item.index, 3, '0');
       if(this.$route.name == 'facility') {
-        return require('../img/facs/fac'+num+'.png');
+        return new URL('../img/facs/fac'+num+'.png', import.meta.url);
       }
       else {
-        return require('../img/projs/proj'+num+'.png');
+        return new URL('../img/projs/proj'+num+'.png', import.meta.url);
       }
     }
   }

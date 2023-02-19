@@ -37,6 +37,10 @@ export default {
 </script>
 
 <style>
+@import './scrollbar.css';
+@import './button.css';
+@import './info-panel.css';
+
 html, body {
   width: 100%;
   height: 100%;
@@ -79,10 +83,6 @@ body {
   display: flex;
   align-items: stretch;
 }
-
-@import './scrollbar.css';
-@import './button.css';
-@import './info-panel.css';
 
 .markup {
   white-space: pre-wrap;

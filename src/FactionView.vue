@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     pic() {
-      return require('../img/factions/'+this.item.id+'.png');
+      return new URL('../img/factions/'+this.item.id+'.png', import.meta.url);
     }
   }
 }

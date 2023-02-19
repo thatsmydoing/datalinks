@@ -23,7 +23,7 @@ function replaceLinks(text) {
         }
       };
     }
-    return '<a v-link=\''+JSON.stringify(obj)+'\'>'+name+'</a>';
+    return '<router-link :to=\''+JSON.stringify(obj)+'\'>'+name+'</router-link>';
   });
 }
 
@@ -59,7 +59,9 @@ export function asHtml(text) {
   result = replaceItalic(result);
   result = replaceLinks(result);
   result = '<pre class="markup">'+result+'</pre>';
-  let id = sha1(result);
-  Vue.partial(id, result);
+  let id = `markup-${sha1(result)}`;
+  Vue.component(id, {
+    template: result
+  });
   return id;
 }

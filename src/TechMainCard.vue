@@ -4,10 +4,10 @@
       <h2>{{ tech.name }}</h2>
       <h3 :class="tech.direction">{{ tech.direction }} {{ tech.level }}</h3>
       <img :src="image" />
-      <div class="allows" v-for="list in tech.allows">
-        <span>{{ names[$key] }}:</span>
-        <span v-for="item in list">
-          <item-link :item="item"></item-link>{{extra(item)}}<template v-if="$index < list.length - 1">,</template>
+      <div class="allows" v-for="(list, key) in tech.allows" :key="key">
+        <span>{{ names[key] }}:</span>
+        <span v-for="(item, index) in list" :key="index">
+          <item-link :item="item"></item-link>{{extra(item)}}<template v-if="index < list.length - 1">,</template>
         </span>
       </div>
     </div>
@@ -47,7 +47,7 @@ export default {
   computed: {
     image() {
       const num = padStart(this.tech.index, 3, '0');
-      return require('../img/tech/tech'+num+'.png');
+      return new URL('../img/tech/tech'+num+'.png', import.meta.url);
     }
   },
   methods: {
