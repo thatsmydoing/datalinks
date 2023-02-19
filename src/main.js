@@ -15,7 +15,6 @@ import ArmorView from './ArmorView.vue'
 import UnitView from './UnitView.vue'
 import AboutView from './AboutView.vue'
 
-import {chain, map} from 'lodash'
 import {getBySlug, dictionary} from './lookup'
 
 const viewMapping = {
@@ -36,9 +35,9 @@ const viewMapping = {
   unit: UnitView
 };
 
-const routes = Object.entries(dictionary).flatMap(([_, value]) => {
+const routes = Object.entries(dictionary).map(([_, value]) => {
   const category = value.slug;
-  const slugs = map(value.list, 'slug');
+  const slugs = value.list.map(item => item.slug);
   if(category != 'soc-model') {
     slugs.sort();
   }
@@ -53,7 +52,7 @@ const routes = Object.entries(dictionary).flatMap(([_, value]) => {
       redirect: '/'+category+'/'+slugs[0]
     }
   ];
-}).concat([
+}).reduce((acc, el) => acc.concat(el)).concat([
   {
     path: '/about',
     name: 'about',

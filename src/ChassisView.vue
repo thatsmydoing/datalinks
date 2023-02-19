@@ -1,6 +1,6 @@
 <template>
   <div class="chassis-view info-panel">
-    <span>Moves: {{ moves }}</span>
+    <span>Moves: <span class="moves">{{ moves }}</span></span>
     <span>Cargo: {{ item.cargo }}</span>
     <span v-if="hasFuel">Fuel: {{ item.fuel }}</span>
     <span>Cost: {{ item.cost }} </span>
@@ -11,7 +11,6 @@
 
 <script>
 import ViewMixin from './ViewMixin'
-import {capitalize} from 'lodash'
 
 export default {
   mixins: [ ViewMixin ],
@@ -20,7 +19,7 @@ export default {
       return this.item.type == 'AIR';
     },
     moves() {
-      return capitalize(this.item.type)+' '+this.item.moves;
+      return this.item.type.toLowerCase()+' '+this.item.moves;
     }
   }
 }
@@ -30,5 +29,9 @@ export default {
 .chassis-view {
   display: flex;
   flex-direction: column;
+}
+
+.moves {
+  text-transform: capitalize;
 }
 </style>

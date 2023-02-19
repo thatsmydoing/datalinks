@@ -37,7 +37,6 @@
 
 <script>
 import {dictionary} from './lookup'
-import {flatMap} from 'lodash'
 
 export default {
   data() {
@@ -70,7 +69,7 @@ export default {
     },
     list() {
       if(this.showAll) {
-        return flatMap(dictionary, (item) => item.list);
+        return Object.values(dictionary).reduce((acc, el) => acc.concat(el.list), []);
       }
       if(this.dictionary) {
         return this.dictionary.list;

@@ -20,18 +20,24 @@ export default {
   methods: {
     hover(event) {
       this.$emit('hover', event.type == 'mouseenter' ? this.tech.id : null);
+    },
+    checkHover() {
+      this.$nextTick(() => {
+        var el = this.$refs.container;
+        if(el == el.parentElement.querySelector(':hover')) {
+          this.$emit('hover', this.tech.id);
+        }
+      });
     }
   },
   emits: [
     'hover',
   ],
   mounted() {
-    setTimeout(() => {
-      var el = this.$el;
-      if(el == el.parentElement.querySelector(':hover')) {
-        this.$emit('hover', this.tech.id);
-      }
-    }, 0);
+    this.checkHover();
+  },
+  updated() {
+    this.checkHover();
   }
 }
 </script>

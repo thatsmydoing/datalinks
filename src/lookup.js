@@ -16,13 +16,15 @@ import {
   units,
   help
 } from './data'
-import {assign, trim, zipObject, map} from 'lodash'
 
 let linkMap = {};
 let dictionary = {};
 
 function buildIndex(list, key) {
-  var dictionary = zipObject(map(list, key), list);
+  const dictionary = {};
+  for (const item of list) {
+    dictionary[item[key]] = item;
+  }
   function find(id) {
     return dictionary[id];
   }
@@ -34,14 +36,15 @@ function buildIndex(list, key) {
 
 function addCategory(slug, name, entries, offset) {
   const list = entries.map(function(item) {
-    return assign({
+    return Object.assign({
       category: slug,
-      slug: trim(item.name
+      slug: item.name
         .toLowerCase()
         .replace(/[()\/\s]+/g, '-')
         .replace(/['.]/g, '')
         .replace(/^the-/, '')
-      , '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, ''),
     }, item);
   });
   const bySlug = {};
@@ -149,6 +152,14 @@ export function getByMarkupLink(id) {
 
 export function getCategoryHelp(category) {
   return help[category];
+}
+
+export function padId(id) {
+  let result = '' + id;
+  while (result.length < 3) {
+    result = '0' + result;
+  }
+  return result;
 }
 
 export { dictionary };

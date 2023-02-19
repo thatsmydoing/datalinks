@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import {padStart} from 'lodash'
 import ViewMixin from './ViewMixin'
 import BlurbBox from './BlurbBox.vue'
+import { padId } from './lookup';
 
 export default {
   mixins: [ ViewMixin ],
@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     image() {
-      const num = padStart(this.item.index, 3, '0');
+      const num = padId(this.item.index);
       if(this.$route.name == 'facility') {
         return new URL('../img/facs/fac'+num+'.png', import.meta.url);
       }

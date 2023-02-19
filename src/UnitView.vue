@@ -2,7 +2,7 @@
   <div class="unit-view info-panel">
     <span>{{ equipment.label }}: <em>{{ equipment.value }}</em></span>
     <span>Defense: <em>{{ defense }}</em></span>
-    <span>Moves: <em>{{ moves }}</em></span>
+    <span>Moves: <em><span class="moves">{{ moves }}</span></em></span>
     <span v-if="cargo">Cargo: <em>{{ cargo }}</em></span>
     <span>Cost: <em>{{ cost }}</em></span>
     <span>Prerequisite: <em><item-link :item="item.prerequisite"></item-link></em></span>
@@ -12,7 +12,6 @@
 
 <script>
 import ViewMixin from './ViewMixin'
-import {ceil, capitalize} from 'lodash'
 
 export default {
   mixins: [ ViewMixin ],
@@ -48,7 +47,7 @@ export default {
     },
     moves() {
       var chassis = this.item.chassis;
-      return capitalize(chassis.type)+' '+chassis.moves;
+      return chassis.type.toLowerCase()+' '+chassis.moves;
     },
     cargo() {
       if(this.item.cargo) {
@@ -92,7 +91,7 @@ export default {
         if(weapon != 1 || armor != 1 || speed != 1 || reactor != 1) {
           cost = Math.max(cost, (reactor * 2 - reactor / 2) * 10);
         }
-        cost = ceil(cost, -1);
+        cost = Math.ceil(cost / 10) * 10;
         return cost;
       }
     }
@@ -109,5 +108,9 @@ export default {
 .unit-view em {
   color: #b8c060;
   font-style: normal;
+}
+
+.moves {
+  text-transform: capitalize;
 }
 </style>

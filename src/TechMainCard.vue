@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import {padStart} from 'lodash'
 import ItemLink from './ItemLink.vue'
+import { padId } from './lookup';
 
 const names = {
   armor: 'Defenses',
@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     image() {
-      const num = padStart(this.tech.index, 3, '0');
+      const num = padId(this.tech.index);
       return new URL('../img/tech/tech'+num+'.png', import.meta.url);
     }
   },

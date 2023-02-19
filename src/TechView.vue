@@ -36,7 +36,6 @@ import BlurbBox from './BlurbBox.vue'
 import ArrowContainer from './ArrowContainer.vue'
 
 import {getBySlug} from './lookup'
-import {debounce} from 'lodash'
 
 export default {
   components: {
@@ -58,14 +57,14 @@ export default {
     }
   },
   methods: {
-    redraw: debounce((self) => {
-      if (!self.$refs.current) return;
+    redraw() {
+      if (!this.$refs.current) return;
 
-      const containerRect = self.$el.getBoundingClientRect();
+      const containerRect = this.$el.getBoundingClientRect();
       const topOffset = containerRect.top;
-      const rect = self.$refs.current.$el.getBoundingClientRect();
+      const rect = this.$refs.current.$el.getBoundingClientRect();
       const mid = rect.top + rect.height / 2 - topOffset;
-      self.prerequisiteArrows = self.$refs.prerequisites.map((c) => {
+      this.prerequisiteArrows = (this.$refs.prerequisites ?? []).map((c) => {
         const rect = c.$refs.container.getBoundingClientRect();
         const start = rect.top + rect.height / 2 - topOffset;
 
@@ -75,7 +74,7 @@ export default {
           to: mid
         }
       });
-      self.successorArrows = self.$refs.successors.map((c) => {
+      this.successorArrows = (this.$refs.successors ?? []).map((c) => {
         const rect = c.$refs.container.getBoundingClientRect();
         const end = rect.top + rect.height / 2 - topOffset;
 
@@ -85,17 +84,27 @@ export default {
           to: end
         }
       });
-    }),
+    },
     hover(on) {
       this.hovered = on;
     }
   },
-  mounted() {
-    this.redraw(this);
+  created() {
+    window.addEventListener('resize', this.redraw);
   },
-  updated() {
-    this.redraw(this);
-  }
+  beforeDestroy() {
+    window.removeEventListener('resize', this.redraw);
+  },
+  mounted() {
+    this.redraw();
+  },
+  watch: {
+    $route(newVal, oldVal) {
+      if (newVal.params.id !== oldVal.params.id) {
+        this.$nextTick(() => this.redraw(this));
+      }
+    },
+  },
 }
 </script>
 
